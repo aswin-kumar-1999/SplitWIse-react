@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import style from './owe.module.css'
 
 class Debt extends Component {
     render() {
