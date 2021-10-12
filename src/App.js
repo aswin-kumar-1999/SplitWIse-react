@@ -6,25 +6,29 @@ import React, { Component } from "react";
 import LeftPanel from "./components/LeftPanel/LeftPanel";
 import RightPanel from "./components/RightPanel/RightPanel";
 import Container from "./components/Container";
-import Header from "./components/Header";
+// import Header from "./components/Header";
+// import { Router } from "react-router";
 
 class App extends Component {
-    constructor(props) {
-        super(props);
+    // constructor(props) {
+    //     super(props);
 
-        // this.state = {
-        //     activityCount: 10,
-        // };
-    }
+    //     // this.state = {
+    //     //     activityCount: 10,
+    //     // };
+    // }
 
     render() {
         return (
             <div className="App">
                 <div className="body">
                     <div className="container">
-                        <LeftPanel />
-                        <Container />
-                        <RightPanel />
+                        {/* <Router> */}
+                            {/* <Link to="/">Home</Link> */}
+                            <LeftPanel />
+                            <Container />
+                            <RightPanel />
+                        {/* </Router> */}
                     </div>
                 </div>
             </div>

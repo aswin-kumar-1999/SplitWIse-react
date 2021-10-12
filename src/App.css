@@ -29,8 +29,14 @@ p {
 
 .leftPanel {
     width: 180px;
-    text-align: center;
+    /* text-align: center; */
     border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+}
+
+.left-links {
+    padding: 10px;
 }
 
 .rightPanel {
@@ -76,5 +82,18 @@ p {
 }
 
 .activityBlock:hover {
+    background-color: rgb(246, 244, 244);
+}
+
+.left-links:hover {
+    background-color: rgb(246, 244, 244);
+}
+
+.users-groups {
+    font-size: 80%;
+    padding: 10px;
+}
+
+.users-groups:hover {
     background-color: rgb(246, 244, 244);
 }
