@@ -1,9 +1,20 @@
+.dashboard {
+    display: flex;
+    justify-content: center;
+}
+
 .header {
-    padding: 0 10px;
+    width: 50vw;
+    height: 100vh;
+    box-shadow: 0 0 10px 2px grey;
+}
+
+.expenseheader {
+    padding: 20px;
     background: rgba(236, 236, 236, 0.836);
 }
 
-.head {
+.head, .owe {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -14,11 +25,13 @@
     justify-content: space-between;
 }
 
-.balance {
-    display: flex;
-    border: 5px 0 solid rgb(116, 3, 3);
+.owe{
+    padding: 10px 20px;
+    color: grey;
+    font-weight: 500;
 }
 
-.balance>div{
-    text-align: center;
+.expense{
+    display: flex;
+    width: 100%;
 }
