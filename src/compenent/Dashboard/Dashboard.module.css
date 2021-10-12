@@ -1,0 +1,24 @@
+.header {
+    padding: 0 10px;
+    background: rgba(236, 236, 236, 0.836);
+}
+
+.head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.button {
+    display: flex;
+    justify-content: space-between;
+}
+
+.balance {
+    display: flex;
+    border: 5px 0 solid rgb(116, 3, 3);
+}
+
+.balance>div{
+    text-align: center;
+}
