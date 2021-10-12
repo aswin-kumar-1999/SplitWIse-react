@@ -5,7 +5,7 @@ export default class Container extends Component {
     render() {
         return (
             <div>
-                <Activity count={this.props.count} />
+                <Activity />
             </div>
         )
     }

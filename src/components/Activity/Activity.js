@@ -6,7 +6,6 @@ export class Activity extends Component {
         super(props);
 
         this.state = {
-            // block: [],
             img1: "https://s3.amazonaws.com/splitwise/uploads/notifications/v2021/0-18.png",
             amount1: 10,
             status1: "owe",
