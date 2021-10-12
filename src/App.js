@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import React, { Component } from "react";
+// import { Route } from "react-router-dom";
+import Activity from "./components/Activity/Activity";
+// import Dashboard from "./components/Dashboard/Dashboard";
+import LeftPanel from "./components/LeftPanel/LeftPanel";
+import RightPanel from "./components/RightPanel/RightPanel";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            activityCount: 10,
+        };
+    }
+
+    render() {
+        return (
+            <div className="App">
+                <div className="container">
+                    <LeftPanel />
+                    <Activity count={this.state.activityCount} />
+                    <RightPanel />
+                </div>
+            </div>
+        );
+    }
 }
 
 export default App;
