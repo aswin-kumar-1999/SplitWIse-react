@@ -8,3 +8,24 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
+
+.btn-expense {
+  cursor: pointer;
+  background-color: #ff4000;
+  font-size: 14px;
+  color: #fff3ef;
+  border: none;
+  border-radius: 5px;
+  padding: 8px;
+  margin-right: 20px;
+}
+
+.btn-settle {
+  cursor: pointer;
+  background-color: #07e2b3;
+  font-size: 14px;
+  color: #e2fdf7;
+  border: none;
+  border-radius: 5px;
+  padding: 8px;
+}

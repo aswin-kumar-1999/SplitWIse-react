@@ -3,6 +3,7 @@ import BackDrop from '../UI/BackDrop'
 import style from './Expense.module.css'
 import Share from './Share'
 import Cards from '../UI/Cards'
+import Paid from './Paid'
 
 class Expense extends Component {
     constructor(props) {
@@ -11,7 +12,6 @@ class Expense extends Component {
         this.state = {
             name: '',
             nameList: [],
-            paid: 'you',
             owe: '',
             share: 'equally',
             shareamount: 0.00,
@@ -19,7 +19,9 @@ class Expense extends Component {
             splitShare: false,
             amount: 0,
             description: '',
-            err: ''
+            err: '',
+            ispayer: false,
+            payer: 'you'
         }
     }
 
@@ -28,7 +30,7 @@ class Expense extends Component {
     }
     nameHandler = (event) => {
         const name = event.target.value;
-        if (!this.state.nameList.includes(name)) {
+        if (!this.state.nameList.includes(name) && name.length !== 0) {
             this.setState(prevState => ({
                 nameList: [...prevState.nameList, name],
                 name: ''
@@ -83,6 +85,12 @@ class Expense extends Component {
                 splitShare: !prevState.splitShare
             }), () => { console.log(this.state.nameList) })
     }
+    payerHandler = () => {
+        this.setState((prevState) => ({ ispayer: !prevState.ispayer }))
+    }
+    checkedPayer = (payer) => {
+        this.setState((prevState) => ({ payer, ispayer: !prevState.ispayer }))
+    }
     render() {
         return (
             <>
@@ -96,6 +104,7 @@ class Expense extends Component {
                             <span>Add an expense</span>
                             <i class="fas fa-times" onClick={this.props.onBackDrop}></i>
                         </header>
+
                         <form onSubmit={this.formHandler}>
                             <div className='d-flex'>
                                 <div className='row p-1'>
@@ -127,7 +136,7 @@ class Expense extends Component {
                             </div>
                             <div className='my-2 px-3'>
                                 <div className='text-center'>
-                                    Paid by <span className={style.share}>{this.state.paid}</span> and split
+                                    Paid by <span className={style.share} onClick={this.payerHandler}>{this.state.payer}</span> and split
                                     <span className={style.share} onClick={this.shareHandler}> {this.state.share}</span>
                                 </div>
                                 <div className='text-center'>({this.state.shareamount}/person)</div>
@@ -136,6 +145,7 @@ class Expense extends Component {
                                 <button type='button' >{this.state.group}</button>
                             </div>
                         </form>
+
                         <hr />
                         <div >
                             <div className='row d-flex justify-content-end m-2'>
@@ -145,12 +155,13 @@ class Expense extends Component {
                                 >
                                     Cancel
                                 </button>
-                                <button type='submit' className='btn px-3 btn-settle col-3 me-2'>Save</button>
+                                <button type='submit' className='btn px-3 btn-settle col-3 me-2' >Save</button>
                             </div>
                         </div>
                     </Cards>
                 </BackDrop>
                 {this.state.splitShare && <Share nameList={this.state.nameList} onCheckedName={this.checkedName} />}
+                {this.state.ispayer && <Paid nameList={this.state.nameList} onCheckerPayer={this.checkedPayer} />}
             </>
         )
     }
