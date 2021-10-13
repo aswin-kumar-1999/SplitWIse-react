@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import Container from './compenents/Container'
-import {  BrowserRouter, Route, Redirect } from 'react-router-dom'
+import Dashboard from './compenents/Dashboard/Dashboard'
+import { BrowserRouter, Route, Redirect } from 'react-router-dom'
 
 class App extends Component {
   constructor(props) {
@@ -15,10 +15,12 @@ class App extends Component {
     return (
       <div>
         <BrowserRouter>
-        <Route path='/' exact>
-          <Redirect to='/dashboard'></Redirect>
-        </Route>
-          <Container />
+          <Route path='/' exact>
+            <Redirect to='/dashboard'></Redirect>
+          </Route>
+          <Route path='/dashboard' exact>
+            <Dashboard />
+          </Route>
         </BrowserRouter>
       </div>
     )

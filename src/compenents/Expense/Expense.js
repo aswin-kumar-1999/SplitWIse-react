@@ -9,7 +9,7 @@ class Expense extends Component {
         super(props)
 
         this.state = {
-            name:'',
+            name: '',
             nameList: [],
             paid: 'you',
             owe: '',
@@ -31,7 +31,7 @@ class Expense extends Component {
         if (!this.state.nameList.includes(name)) {
             this.setState(prevState => ({
                 nameList: [...prevState.nameList, name],
-                name:''
+                name: ''
             }))
         }
     }
@@ -54,8 +54,8 @@ class Expense extends Component {
         const description = event.target.value;
         this.setState({ description })
     }
-    nameChange=(event)=>{
-        this.setState({name:event.target.value})
+    nameChange = (event) => {
+        this.setState({ name: event.target.value })
     }
     formHandler = (event) => {
         event.preventDefault();
@@ -64,6 +64,24 @@ class Expense extends Component {
             this.setState((prevState) => ({ shareamount: prevState.amount / length }));
             this.props.onNewExpense({})
         }
+    }
+    checkedName = (unchecked) => {
+        const nameList = this.state.nameList.filter((name, index) => {
+            if (unchecked.includes(name)) {
+                return false
+            }
+            else {
+                return true
+            }
+        })
+        console.log(nameList)
+        const length = nameList.length;
+        this.setState((prevState) => (
+            {
+                shareamount: prevState.amount / length,
+                nameList,
+                splitShare: !prevState.splitShare
+            }), () => { console.log(this.state.nameList) })
     }
     render() {
         return (
@@ -132,7 +150,7 @@ class Expense extends Component {
                         </div>
                     </Cards>
                 </BackDrop>
-                {this.state.splitShare && <Share onClick={this.shareHandler} nameList={this.state.nameList} />}
+                {this.state.splitShare && <Share nameList={this.state.nameList} onCheckedName={this.checkedName} />}
             </>
         )
     }
