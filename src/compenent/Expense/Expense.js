@@ -1,7 +1,20 @@
 import React, { Component } from 'react'
 import BackDrop from '../UI/BackDrop'
+import style from './Expense.module.css'
 
 class Expense extends Component {
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            paid: 'you',
+            owe: '',
+            share: 'equally',
+            shareamount: 0.00,
+            group: 'No group'
+        }
+    }
+
     render() {
         return (
             <BackDrop>
@@ -24,11 +37,28 @@ class Expense extends Component {
                         <img src="https://s3.amazonaws.com/splitwise/uploads/category/icon/square_v2/uncategorized/general@2x.png" class="category" alt="img" width='70px' height='70px' className='rounded-3' />
                         <div className='ps-2'>
                             <input type='text' className='col-9' placeholder='Enter a description'></input>
-                            <br/>
+                            <br />
                             ₹<input type='text' className='col-8' placeholder='0.00'></input>
                         </div>
                     </div>
+                    <div className='my-2 px-3'>
+                        <div className='text-center'>
+                            Paid by <span className={style.share}>{this.state.paid}</span> and split
+                            <span className={style.share}> {this.state.share}</span>
+                        </div>
+                        <div className='text-center'>({this.state.shareamount}/person)</div>
+                    </div>
+                    <div className={style.btn}>
+                        <button type='button' >{this.state.group}</button>
+                    </div>
                 </main>
+                <hr />
+                <div >
+                    <div className='row d-flex justify-content-end m-2'>
+                        <button type='button' className='btn btn-outline-secondary bg-opacity-10 col-3 me-2'>Cancel</button>
+                        <button type='button' className='btn px-3 btn-settle col-3 me-2'>Save</button>
+                    </div>
+                </div>
             </BackDrop>
         )
     }
