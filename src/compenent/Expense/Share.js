@@ -2,7 +2,20 @@ import React, { Component } from 'react'
 import Cards from '../UI/Cards'
 import style from './Expense.module.css'
 class Share extends Component {
+    constructor(props) {
+        super(props)
+    
+        this.state = {
+             
+        }
+    }
+    
+    checkHandler=(event)=>{
+        console.log(event.target.value)
+    }
+
     render() {
+        { console.log("share") }
         return (
             <div className={style["share-container"]}>
                 <Cards>
@@ -16,15 +29,17 @@ class Share extends Component {
                     <div className='px-3'>
                         <h4>Split equally</h4>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked />
-                            <label class="form-check-label" for="flexCheckChecked">
-                                Aswin
-                            </label>
-                            <br/>
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked />
-                            <label class="form-check-label" for="flexCheckChecked">
-                                Harsh
-                            </label>
+                            {this.props.nameList.map((name, index) => (
+                                <div key={index}>
+                                    <input 
+                                    class="form-check-input" type="checkbox" 
+                                    value={name} id="flexCheckChecked" 
+                                    defaultChecked onChange={this.checkHandler}/>
+                                    <label class="form-check-label" for="flexCheckChecked">
+                                        {name}
+                                    </label>
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </Cards>
