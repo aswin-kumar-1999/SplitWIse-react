@@ -56,7 +56,7 @@ class Dashboard extends Component {
         this.setState((prevState) => ({ expensePop: !prevState.expensePop }))
     }
     newExpensehandler = ({ amount, paid_by, owes, desc, expensePop }) => {
-        console.log(amount,paid_by,owes,desc,expensePop)
+        console.log(amount, paid_by, owes, desc, expensePop)
         if (paid_by === this.state.user) {
             const shareamount = amount / (owes.length + 1);
             const lent = amount - shareamount
@@ -88,7 +88,7 @@ class Dashboard extends Component {
                 <div className="d-flex justify-content-center content overflow-auto">
 
                     <div className="shadow bg-body rounded col-lg-5">
-                        <div className="p-3" style={{ background: 'rgba(236, 236, 236, 0.836)' }}>
+                        <div className="p-3 head">
 
                             <div className="d-flex flex-wrap justify-content-between align-items-center mb-2">
                                 <h3>Dashboard</h3>
@@ -99,7 +99,7 @@ class Dashboard extends Component {
                             </div>
 
                             <div class="container mt-3 border-top border-bottom border-2">
-                                <div className="row py-1 fs-6" style={{ color: 'grey' }} >
+                                <div className="row py-1 fs-6 " >
                                     <div class="col-sm-4 border-end text-center " >
                                         total balance<br /> ₹ {(this.state.lent + this.state.owe).toFixed(2)}
                                     </div>

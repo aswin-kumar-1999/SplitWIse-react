@@ -25,6 +25,16 @@
     z-index: 2;
     position: absolute;
     top: 0;
-    left:70vw;
+    left: 70vw;
     transition: 1s ease-in-out;
+}
+
+.header {
+    background: #07e2b3;
+    color: white;
+}
+
+.paid {
+    background-color: #07e2b3;
+    color: white;
 }

@@ -1,3 +1,4 @@
+import './Dashboard.css'
 function Credit(props) {
     return (
         <>
@@ -7,7 +8,7 @@ function Credit(props) {
                     alt="Avatar" className='rounded-circle' width='40px' height='40px'
                 />
                 <div className='px-3 my-2'>{props.name}
-                    <div style={{ color: '#ff4000' }}>owe you INR {props.amount}</div>
+                    <div className='credit'>owe you INR {props.amount}</div>
                 </div>
             </div>
 

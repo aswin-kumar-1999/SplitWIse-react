@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Cards from '../UI/Cards'
-import style from './Expense.module.css'
+import './Expense.css'
 
 class paid extends Component {
     constructor(props) {
@@ -21,11 +21,10 @@ class paid extends Component {
     }
     render() {
         return (
-            <div className={style["share-container"]}>
+            <div className="share-container">
                 <Cards>
                     <header
-                        className='d-flex justify-content-between align-items-center px-2 py-1 fs-5 fw-bold rounded-top-3 '
-                        style={{ background: '#07e2b3', color: "white" }}
+                        className='d-flex justify-content-between align-items-center px-2 py-1 fs-5 fw-bold rounded-top-3 paid'
                     >
                         <span>Choose payer</span>
                         <i className="fas fa-times" onClick={this.sendPayer}></i>
@@ -34,7 +33,7 @@ class paid extends Component {
                         <div class="form-check">
                             {this.props.nameList.map((name, index) => (
                                 <div key={index}>
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" onChange={this.payerhandler} value={name} />
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" onChange={this.payerhandler} value={name}  />
                                     <label class="form-check-label" for="flexRadioDefault1">
                                         {name}
                                     </label>

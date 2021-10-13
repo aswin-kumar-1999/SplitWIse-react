@@ -1,9 +1,13 @@
 import React, { Component } from 'react'
 import BackDrop from '../UI/BackDrop'
-import style from './Expense.module.css'
+import  './Expense.css'
 import Share from './Share'
 import Cards from '../UI/Cards'
 import Paid from './Paid'
+
+// const user = require('../Store/user.json')
+// const group = require('../Store/group.json')
+// const transaction = require('../Store/transaction.json')
 
 class Expense extends Component {
     constructor(props) {
@@ -21,7 +25,8 @@ class Expense extends Component {
             description: '',
             err: '',
             ispayer: false,
-            payer: 'you'
+            payer: 'you',
+            groupName: ''
         }
     }
 
@@ -37,10 +42,7 @@ class Expense extends Component {
             }))
         }
     }
-    // nameRemover = (event) => {
-    //     const nameList = event.target.value;
-    //     console.log(nameList)
-    // }
+
     amountHandler = (event) => {
         const amount = event.target.value;
         if (!isNaN(amount) && this.state.nameList.length !== 0) {
@@ -83,13 +85,30 @@ class Expense extends Component {
                 shareamount: prevState.amount / length,
                 nameList,
                 splitShare: !prevState.splitShare
-            }), () => { console.log(this.state.nameList) })
+            }))
     }
     payerHandler = () => {
         this.setState((prevState) => ({ ispayer: !prevState.ispayer }))
     }
     checkedPayer = (payer) => {
         this.setState((prevState) => ({ payer, ispayer: !prevState.ispayer }))
+    }
+    savehandler = () => {
+        if (this.state.nameList.length >= 2) {
+            const payer = this.state.payer === "you" ? this.props.user : this.state.payer;
+            const index = this.state.nameList.findIndex((name) => name === payer);
+            const owe = this.state.nameList
+            owe.splice(index, 1);
+            console.log(owe)
+            this.props.onNewExpense({
+                amount: this.state.amount,
+                paid_by: payer,
+                owes: owe,
+                desc: this.state.description,
+                expensePop: false
+            })
+        }
+
     }
     render() {
         return (
@@ -98,8 +117,7 @@ class Expense extends Component {
                     <Cards>
                         <header
                             className='d-flex justify-content-between align-items-center
-                             px-2 py-1 fs-5 fw-bold rounded-top-3'
-                            style={{ background: '#07e2b3', color: "white" }}
+                             px-2 py-1 fs-5 fw-bold rounded-top-3 header'
                         >
                             <span>Add an expense</span>
                             <i class="fas fa-times" onClick={this.props.onBackDrop}></i>
@@ -130,18 +148,24 @@ class Expense extends Component {
 
                                     </input>
                                     <br />
-                                    ₹<input type='number' className={'col-8' + this.state.err} placeholder='0.00' onBlur={this.amountHandler}></input>
+                                    ₹<input type='number'
+                                        className={'col-8' + this.state.err}
+                                        placeholder='0.00' onBlur={this.amountHandler}></input>
                                     {this.state.err !== '' && <div className='valid-feedback'> enter the proper amount</div>}
                                 </div>
                             </div>
                             <div className='my-2 px-3'>
                                 <div className='text-center'>
-                                    Paid by <span className={style.share} onClick={this.payerHandler}>{this.state.payer}</span> and split
-                                    <span className={style.share} onClick={this.shareHandler}> {this.state.share}</span>
+                                    Paid by <span className='share'
+                                        onClick={this.payerHandler}
+                                    >
+                                        {this.state.payer}
+                                    </span> and split
+                                    <span className='share' onClick={this.shareHandler}> {this.state.share}</span>
                                 </div>
                                 <div className='text-center'>({this.state.shareamount}/person)</div>
                             </div>
-                            <div className={style.btn}>
+                            <div className='btn'>
                                 <button type='button' >{this.state.group}</button>
                             </div>
                         </form>
@@ -155,7 +179,7 @@ class Expense extends Component {
                                 >
                                     Cancel
                                 </button>
-                                <button type='submit' className='btn px-3 btn-settle col-3 me-2' >Save</button>
+                                <button type='submit' className='btn px-3 btn-settle col-3 me-2' onClick={this.savehandler}>Save</button>
                             </div>
                         </div>
                     </Cards>

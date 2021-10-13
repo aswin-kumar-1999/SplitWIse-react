@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Cards from '../UI/Cards'
-import style from './Expense.module.css'
+import './Expense.css'
 class Share extends Component {
     constructor(props) {
         super(props)
@@ -17,17 +17,16 @@ class Share extends Component {
             }))
         }
     }
-    checkNameHandler=()=>{
+    checkNameHandler = () => {
         console.log("uncheck")
         this.props.onCheckedName(this.state.uncheckname)
     }
     render() {
         return (
-            <div className={style["share-container"]}>
+            <div className="share-container">
                 <Cards>
                     <header
                         className='d-flex justify-content-between align-items-center px-2 py-1 fs-5 fw-bold rounded-top-3 '
-                        style={{ background: '#07e2b3', color: "white" }}
                     >
                         <span>Share an expense</span>
                         <i className="fas fa-times" onClick={this.checkNameHandler}></i>

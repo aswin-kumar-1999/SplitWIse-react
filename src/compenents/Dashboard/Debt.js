@@ -7,7 +7,7 @@ function Debt(props) {
 
                 <div className='px-3'>
                     {props.name}
-                    <div style={{ color: '#07e2b3' }}>you owe INR {props.amount}</div>
+                    <div className='debt'>you owe INR {props.amount}</div>
                 </div>
             </div>
         </>

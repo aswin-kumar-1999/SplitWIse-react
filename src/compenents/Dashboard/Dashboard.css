@@ -6,3 +6,16 @@
 .content {
     min-height: 100vh;
 }
+
+.credit {
+    color: #ff4000
+}
+.debt{
+    color: #07e2b3;
+}
+.head{
+    background: rgba(236, 236, 236, 0.836);
+}
+.container{
+    color: grey;
+}
