@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Container from './compenent/Container'
+import Container from './compenents/Container'
 import {  BrowserRouter, Route, Redirect } from 'react-router-dom'
 
 class App extends Component {

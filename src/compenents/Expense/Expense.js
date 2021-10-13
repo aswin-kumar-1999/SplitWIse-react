@@ -32,14 +32,13 @@ class Expense extends Component {
             this.setState(prevState => ({
                 nameList: [...prevState.nameList, name],
                 name:''
-                // shareamount: prevState.amount / this.state.nameList.length
             }))
         }
     }
-    nameRemover = (event) => {
-        const nameList = event.target.value;
-        console.log(nameList)
-    }
+    // nameRemover = (event) => {
+    //     const nameList = event.target.value;
+    //     console.log(nameList)
+    // }
     amountHandler = (event) => {
         const amount = event.target.value;
         if (!isNaN(amount) && this.state.nameList.length !== 0) {
