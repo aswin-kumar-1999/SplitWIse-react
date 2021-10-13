@@ -11,6 +11,7 @@ export default class Group extends Component {
                 style={{ display: this.props.display }}
                 className="users-groups"
             >
+                <i class="fa fa-tag" style={{ padding: "5px" }}></i>
                 {this.props.gname}
             </div>
         );

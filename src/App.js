@@ -6,6 +6,7 @@ import React, { Component } from "react";
 import LeftPanel from "./components/LeftPanel/LeftPanel";
 import RightPanel from "./components/RightPanel/RightPanel";
 import Container from "./components/Container";
+import Header from "./components/Header";
 // import Header from "./components/Header";
 // import { Router } from "react-router";
 
@@ -21,13 +22,14 @@ class App extends Component {
     render() {
         return (
             <div className="App">
+                <Header />
                 <div className="body">
                     <div className="container">
                         {/* <Router> */}
-                            {/* <Link to="/">Home</Link> */}
-                            <LeftPanel />
-                            <Container />
-                            <RightPanel />
+                        {/* <Link to="/">Home</Link> */}
+                        <LeftPanel />
+                        <Container />
+                        <RightPanel />
                         {/* </Router> */}
                     </div>
                 </div>

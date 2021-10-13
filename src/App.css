@@ -1,14 +1,19 @@
 .App {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    /* justify-content: center; */
 }
 
 p {
     margin: 0% 5px;
 }
 
+body {
+    margin-top: 0%;
+}
+
 .container {
-    width: 900px;
+    width: 1000px;
     height: 100vh;
     display: flex;
     flex-direction: row;
@@ -21,28 +26,36 @@ p {
     flex-direction: column;
 }
 
-.activity {
-    width: 540px;
+.centerPanel {
+    width: 600px;
     text-align: center;
-    border: 1px solid black;
+    /* border: 1px solid black; */
+    box-shadow: 0 0 5px 2px gray;
 }
 
 .leftPanel {
-    width: 180px;
+    width: 200px;
     /* text-align: center; */
-    border: 1px solid black;
+    /* border: 1px solid black;
+    border-left: none; */
     display: flex;
     flex-direction: column;
 }
 
 .left-links {
+    width: 180px;
     padding: 10px;
 }
 
+.group-user-tag {
+    background-color: rgb(240, 239, 239);
+}
+
 .rightPanel {
-    width: 180px;
+    width: 200px;
     text-align: center;
-    border: 1px solid black;
+    /* border-left: none;
+    border: 1px solid black; */
 }
 
 .activityHead {
@@ -53,6 +66,37 @@ p {
     background-color: rgb(216, 214, 214);
 }
 
+.groupHead {
+    margin-top: 0%;
+    margin-bottom: 0%;
+    text-align: left;
+    padding: 10px;
+    background-color: rgba(236, 236, 236, 0.836);
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn-expense {
+    cursor: pointer;
+    background-color: #ff4000;
+    font-size: 14px;
+    color: #fff3ef;
+    border: none;
+    border-radius: 5px;
+    padding: 8px;
+    margin-right: 20px;
+}
+
+.btn-settle {
+    cursor: pointer;
+    background-color: #07e2b3;
+    font-size: 14px;
+    color: #e2fdf7;
+    border: none;
+    border-radius: 5px;
+    padding: 8px;
+}
+
 .activityBlock {
     width: 100%;
     height: 80px;
@@ -61,13 +105,15 @@ p {
     border-right: none; */
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: flex-start;
     align-items: center;
+    padding-left: 20px;
 }
 
 .activityText {
     display: flex;
     flex-direction: column;
+    padding-left: 15px;
 }
 
 .status-amount {
@@ -86,14 +132,25 @@ p {
 }
 
 .left-links:hover {
-    background-color: rgb(246, 244, 244);
+    background-color: rgb(233, 231, 231);
 }
 
 .users-groups {
     font-size: 80%;
     padding: 10px;
+    width: 180px;
 }
 
 .users-groups:hover {
-    background-color: rgb(246, 244, 244);
+    background-color: rgb(233, 231, 231);
+}
+
+.allExpenses {
+    display: flex;
+}
+
+.position-elements {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
 }

@@ -21,14 +21,22 @@ class LeftPanel extends Component {
 
     componentDidUpdate() {
         let newGroupDisplay = this.state.groupDisplay.map((display, index) => {
-            if (this.state.group[index].toLowerCase().includes(this.state.search.toLowerCase())) {
+            if (
+                this.state.group[index]
+                    .toLowerCase()
+                    .includes(this.state.search.toLowerCase())
+            ) {
                 return "block";
             } else {
                 return "none";
             }
         });
         let newUsersDisplay = this.state.usersDisplay.map((display, index) => {
-            if (this.state.users[index].toLowerCase().includes(this.state.search.toLowerCase())) {
+            if (
+                this.state.users[index]
+                    .toLowerCase()
+                    .includes(this.state.search.toLowerCase())
+            ) {
                 return "block";
             } else {
                 return "none";
@@ -60,11 +68,17 @@ class LeftPanel extends Component {
         return (
             <div className="leftPanel">
                 {/* <Link to="/">Home</Link> */}
-                <div className="left-links">Dashboard</div>
-                <div className="left-links">Recent Activity</div>
-                <div className="input-group mb-3">
+                <div className="left-links allExpenses">
+                    <i class="fa fa-braille" style={{ padding: "5px" }}></i>
+                    <div>Dashboard</div>
+                </div>
+                <div className="left-links allExpenses">
+                    <i class="fa fa-flag" style={{ padding: "5px" }}></i>
+                    <div>Recent Activity</div>
+                </div>
+                <div className="input-group mb-3" style={{ width: "180px" }}>
                     <span className="input-group-text" id="basic-addon1">
-                        @
+                        <i class="fa fa-search"></i>
                     </span>
                     <input
                         type="text"
@@ -75,8 +89,22 @@ class LeftPanel extends Component {
                         value={this.state.search}
                     />
                 </div>
-                <div className="left-links">All expensives</div>
-                <div className="left-links">Groups</div>
+                <div className="left-links allExpenses">
+                    <i class="fa fa-list-ul" style={{ padding: "5px" }}></i>
+                    <div>All expensives</div>
+                </div>
+                <div
+                    className="left-links group-user-tag"
+                    // style={{ backgroundColor: "rgb(246, 244, 244)" }}
+                >
+                    Groups
+                </div>
+                {/* {this.state.group.map((gname, index) => {()
+                    <Group
+                        display={this.state.groupDisplay[index]}
+                        gname={this.state.group[index]}
+                    />;
+                )})} */}
                 <Group
                     display={this.state.groupDisplay[0]}
                     gname={this.state.group[0]}
@@ -86,7 +114,12 @@ class LeftPanel extends Component {
                     gname={this.state.group[1]}
                 />
 
-                <div className="left-links">Friends</div>
+                <div
+                    className="left-links group-user-tag"
+                    // style={{ backgroundColor: "rgb(246, 244, 244)" }}
+                >
+                    Friends
+                </div>
                 <Users
                     display={this.state.usersDisplay[0]}
                     uname={this.state.users[0]}

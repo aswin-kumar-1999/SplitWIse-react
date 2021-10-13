@@ -7,6 +7,8 @@ export default class Users extends Component {
                 style={{ display: this.props.display }}
                 className="users-groups"
             >
+                {" "}
+                <i className="fa fa-user" style={{padding:"5px"}}></i>
                 {this.props.uname}
             </div>
         );
