@@ -6,6 +6,13 @@ export default class Group extends Component {
     }
 
     render() {
-        return <div className="users-groups">{this.props.gname}</div>;
+        return (
+            <div
+                style={{ display: this.props.display }}
+                className="users-groups"
+            >
+                {this.props.gname}
+            </div>
+        );
     }
 }

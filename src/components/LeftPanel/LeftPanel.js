@@ -12,29 +12,48 @@ class LeftPanel extends Component {
 
         this.state = {
             group: ["Project", "Kashmir"],
+            groupDisplay: ["block", "block"],
             users: ["Harsh", "Aswin"],
+            usersDisplay: ["block", "block"],
             search: "",
         };
     }
 
-    // componentDidMount() {
-    //     fs.readFile("../../data/group.json")
-    //         .then((data) => data.json())
-    //         .then((data) => {
-    //             console.log(1, data);
-    //             this.setState({ group: data });
-    //         });
-
-    //     fs.readFile("../../data/users.json")
-    //         .then((data) => data.json())
-    //         .then((data) => {
-    //             this.setState({ users: data });
-    //         });
-    // }
+    componentDidUpdate() {
+        let newGroupDisplay = this.state.groupDisplay.map((display, index) => {
+            if (this.state.group[index].toLowerCase().includes(this.state.search.toLowerCase())) {
+                return "block";
+            } else {
+                return "none";
+            }
+        });
+        let newUsersDisplay = this.state.usersDisplay.map((display, index) => {
+            if (this.state.users[index].toLowerCase().includes(this.state.search.toLowerCase())) {
+                return "block";
+            } else {
+                return "none";
+            }
+        });
+        // console.log(newUsersDisplay === this.state.usersDisplay);
+        // console.log(newUsersDisplay, this.state.usersDisplay);
+        // console.log(newGroupDisplay === this.state.groupDisplay);
+        console.log(newUsersDisplay);
+        if (
+            JSON.stringify(newUsersDisplay) !==
+                JSON.stringify(this.state.usersDisplay) ||
+            JSON.stringify(newGroupDisplay) !==
+                JSON.stringify(this.state.groupDisplay)
+        ) {
+            this.setState({
+                usersDisplay: newUsersDisplay,
+                groupDisplay: newGroupDisplay,
+            });
+        }
+    }
 
     search = (event) => {
         this.setState({ search: event.target.value });
-        console.log(this.state.search);
+        // console.log(this.state.search);
     };
 
     render() {
@@ -50,7 +69,7 @@ class LeftPanel extends Component {
                     <input
                         type="text"
                         className="form-control"
-                        placeholder="Username"
+                        placeholder="Search here"
                         aria-describedby="basic-addon1"
                         onChange={this.search}
                         value={this.state.search}
@@ -58,12 +77,24 @@ class LeftPanel extends Component {
                 </div>
                 <div className="left-links">All expensives</div>
                 <div className="left-links">Groups</div>
-                <Group gname={this.state.group[0]} />
-                <Group gname={this.state.group[1]} />
+                <Group
+                    display={this.state.groupDisplay[0]}
+                    gname={this.state.group[0]}
+                />
+                <Group
+                    display={this.state.groupDisplay[1]}
+                    gname={this.state.group[1]}
+                />
 
                 <div className="left-links">Friends</div>
-                <Users uname={this.state.users[0]} />
-                <Users uname={this.state.users[1]} />
+                <Users
+                    display={this.state.usersDisplay[0]}
+                    uname={this.state.users[0]}
+                />
+                <Users
+                    display={this.state.usersDisplay[1]}
+                    uname={this.state.users[1]}
+                />
                 {/* <Router>
                     <Link to="/dashboard">Dashboard</Link>
                     <Link to="/activity">Recent activity</Link>

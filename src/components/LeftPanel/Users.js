@@ -2,6 +2,13 @@ import React, { Component } from "react";
 
 export default class Users extends Component {
     render() {
-        return <div className="users-groups">{this.props.uname}</div>;
+        return (
+            <div
+                style={{ display: this.props.display }}
+                className="users-groups"
+            >
+                {this.props.uname}
+            </div>
+        );
     }
 }

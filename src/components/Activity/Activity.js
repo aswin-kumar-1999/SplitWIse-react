@@ -50,10 +50,10 @@ export class Activity extends Component {
                 <ActivityBlock
                     date={this.state.Date1}
                     group={this.state.Group1}
-                    person={this.state.person1}
-                    desc={this.state.Desc1}
+                    person="Aswin Kumar"
+                    desc="Travel"
                     img={this.state.img1}
-                    amount={this.state.amount1}
+                    amount="30"
                     // status={this.state.status1}
                 />
             </div>
