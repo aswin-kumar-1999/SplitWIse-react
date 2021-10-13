@@ -15,11 +15,7 @@ class Dashboard extends Component {
         }
     }
     expenseHandler = () => {
-        this.setState({ expensePop: true })
-    }
-    backdropHandler=()=>{
-        console.log("INSIDE")
-        this.setState((prevState)=>({expensePop:!prevState.expensePop}))
+        this.setState((prevState) => ({ expensePop: !prevState.expensePop }))
     }
     render() {
         return (
@@ -73,7 +69,7 @@ class Dashboard extends Component {
 
                     </div>
                 </div>
-                {this.state.expensePop && <Expense onBackDrop={this.backdropHandler}/>}
+                {this.state.expensePop && <Expense onBackDrop={this.expenseHandler} />}
             </>
         )
     }

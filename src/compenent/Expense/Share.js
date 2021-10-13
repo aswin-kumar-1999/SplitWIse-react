@@ -11,18 +11,19 @@ class Share extends Component {
                         style={{ background: '#07e2b3', color: "white" }}
                     >
                         <span>Share an expense</span>
-                        <i class="fas fa-times" ></i>
+                        <i class="fas fa-times" onClick={this.props.onClick}></i>
                     </header>
-                    <div>
+                    <div className='px-3'>
                         <h4>Split equally</h4>
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked />
                             <label class="form-check-label" for="flexCheckChecked">
                                 Aswin
                             </label>
+                            <br/>
                             <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked />
                             <label class="form-check-label" for="flexCheckChecked">
-                                Hasrsh
+                                Harsh
                             </label>
                         </div>
                     </div>

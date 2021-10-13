@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Container from './compenent/Container'
-import { Link, BrowserRouter, Route, Redirect } from 'react-router-dom'
+import {  BrowserRouter, Route, Redirect } from 'react-router-dom'
 
 class App extends Component {
   constructor(props) {

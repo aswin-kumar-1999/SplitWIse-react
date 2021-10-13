@@ -19,7 +19,7 @@ class Expense extends Component {
     }
 
     shareHandler = () => {
-        this.setState({ splitShare: true })
+        this.setState((prevState) => ({ splitShare: !prevState.splitShare }))
     }
 
     render() {
@@ -71,7 +71,7 @@ class Expense extends Component {
                     </Cards>
 
                 </BackDrop>
-                {this.state.splitShare && <Share />}
+                {this.state.splitShare && <Share onClick={this.shareHandler} />}
             </>
         )
     }
