@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Container from './compenent/Container'
+import { Link, BrowserRouter, Route, Redirect } from 'react-router-dom'
 
 class App extends Component {
   constructor(props) {
@@ -13,7 +14,12 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Container />
+        <BrowserRouter>
+        <Route path='/' exact>
+          <Redirect to='/dashboard'></Redirect>
+        </Route>
+          <Container />
+        </BrowserRouter>
       </div>
     )
   }

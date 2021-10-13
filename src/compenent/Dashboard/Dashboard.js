@@ -17,6 +17,10 @@ class Dashboard extends Component {
     expenseHandler = () => {
         this.setState({ expensePop: true })
     }
+    backdropHandler=()=>{
+        console.log("INSIDE")
+        this.setState((prevState)=>({expensePop:!prevState.expensePop}))
+    }
     render() {
         return (
             <>
@@ -59,6 +63,8 @@ class Dashboard extends Component {
                         <div className="d-flex">
                             <span class="border-end border-1 col-6"  >
                                 <Debt name="Aswin" amount="200" />
+                                <Debt name="Jeni" amount="100" />
+
                             </span>
                             <span class="border-start border-1 col-6">
                                 <Credit name="Gokul" amount="200" />
@@ -67,7 +73,7 @@ class Dashboard extends Component {
 
                     </div>
                 </div>
-                {this.state.expensePop && <Expense />}
+                {this.state.expensePop && <Expense onBackDrop={this.backdropHandler}/>}
             </>
         )
     }

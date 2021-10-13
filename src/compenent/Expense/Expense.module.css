@@ -7,7 +7,8 @@
     display: flex;
     justify-content: center;
 }
-.btn button{
+
+.btn button {
     background: white;
     color: gray;
     border: 1px solid rgb(194, 192, 192);
@@ -16,7 +17,14 @@
     margin: 10px 0;
 }
 
-.btn button:hover{
+.btn button:hover {
     background: rgb(236, 236, 236);
+}
 
+.share-container {
+    z-index: 2;
+    position: absolute;
+    top: 0;
+    left:70vw;
+    transition: 1s ease-in-out;
 }
