@@ -3,6 +3,7 @@ import Credit from './Credit'
 import Debt from './Debt'
 import Expense from '../Expense/Expense'
 import './Dashboard.css'
+
 const transaction = require('../Store/transaction.json')
 
 class Dashboard extends Component {
@@ -121,14 +122,14 @@ class Dashboard extends Component {
                         </div>
 
                         <div className="d-flex ">
-                            <span class="border-end border-1 col-6 " >
-                                {this.state.credit.map((data, index) => (
-                                    <Credit key={index} name={data[0]} amount={data[1].toFixed(2)} />
-                                ))}
-                            </span>
-                            <span class="border-start border-1 col-6">
+                            <span class="border-end border-1 col-6">
                                 {this.state.debt.map((data, index) => (
                                     <Debt key={index} name={data[0]} amount={data[1].toFixed(2)} />
+                                ))}
+                            </span>
+                            <span class="border-start border-1 col-6 " >
+                                {this.state.credit.map((data, index) => (
+                                    <Credit key={index} name={data[0]} amount={data[1].toFixed(2)} />
                                 ))}
                             </span>
                         </div>
