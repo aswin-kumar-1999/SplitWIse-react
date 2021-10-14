@@ -17,8 +17,15 @@ export default class GroupUi extends Component {
         };
     }
 
-    componentDidUpdate() {
+    componentDidMount() {
+        this.updateData();
+    }
 
+    componentDidUpdate() {
+        this.updateData();
+    }
+    
+    updateData = () => {
         if (groupData[this.props.groupName]) {
             if (this.props.groupName !== this.state.gname) {
                 this.setState({
@@ -57,7 +64,7 @@ export default class GroupUi extends Component {
                 }
             }
         }
-    }
+    };
 
     render() {
         return (
