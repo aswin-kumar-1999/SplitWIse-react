@@ -1,18 +1,73 @@
 import React, { Component } from "react";
 import GroupBlock from "./GroupBlock";
 const groupData = require("../../data/group.json");
+const transactions = require("../../data/transaction.json");
 
 export default class GroupUi extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            // groupName: "Project",
             img1: "https://s3.amazonaws.com/splitwise/uploads/notifications/v2021/0-18.png",
-            paidBy: "Harshdeep Singh",
-            amount: 300,
-            desc: "Travel",
+            gname: "",
+            paidBy: [],
+            amount: [],
+            desc: [],
+            temp: 0,
         };
+    }
+
+    componentDidUpdate() {
+        // console.log(this.props.groupName);
+        // console.log(groupData);
+        if (groupData[this.props.groupName]) {
+            if (this.props.groupName !== this.state.gname) {
+                this.setState({
+                    gname: "",
+                    paidBy: [],
+                    amount: [],
+                    desc: [],
+                    temp: 0,
+                });
+                for (let index = 1; index <= transactions["last"]; index++) {
+                    console.log(index);
+                    if (
+                        groupData[this.props.groupName].transaction.includes(
+                            index
+                        ) &&
+                        index !== this.state.temp
+                    ) {
+                        console.log(31);
+                        this.setState((prevState) => ({
+                            paidBy: [
+                                ...prevState.paidBy,
+                                transactions[`${index}`].paid_by,
+                            ],
+                            amount: [
+                                ...prevState.amount,
+                                transactions[`${index}`].amount,
+                            ],
+                            desc: [
+                                ...prevState.desc,
+                                transactions[`${index}`].desc,
+                            ],
+                            temp: index,
+                            gname: this.props.groupName,
+                            // clear: true,
+                        }));
+                    }
+                }
+                // } else if (this.state.clear) {
+                //     this.setState({
+                //         gname: "",
+                //         paidBy: [],
+                //         amount: [],
+                //         desc: [],
+                //         temp: 0,
+                //         clear: false,
+                //     });
+            }
+        }
     }
 
     render() {
@@ -35,7 +90,16 @@ export default class GroupUi extends Component {
                         <button className="btn-settle">Settle Up</button>
                     </div>
                 </h2>
-                <GroupBlock
+                {console.log(this.state.paidBy)}
+                {this.state.paidBy.map((person, index) => (
+                    <GroupBlock
+                        img={this.state.img1}
+                        paidBy={person}
+                        amount={this.state.amount[index]}
+                        desc={this.state.desc[index]}
+                    />
+                ))}
+                {/* <GroupBlock
                     img={this.state.img1}
                     paidBy={this.state.paidBy}
                     amount={this.state.amount}
@@ -58,7 +122,7 @@ export default class GroupUi extends Component {
                     paidBy="Aswin"
                     amount="100"
                     desc="Snacks"
-                />
+                /> */}
             </div>
         );
     }

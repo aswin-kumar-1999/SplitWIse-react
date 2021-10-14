@@ -7,6 +7,7 @@ import Activity from "./components/Activity/Activity";
 import GroupUi from "./components/GroupUi/GroupUi";
 import Header from "./components/Header";
 import { Switch } from "react-router";
+const groupData = require("./data/group.json");
 
 class App extends Component {
     constructor(props) {
@@ -14,12 +15,22 @@ class App extends Component {
 
         this.state = {
             groupName: "",
+            groups: [],
         };
+    }
+
+    componentDidMount() {
+        // console.log(this.props.match.params.id);
+        for (let key in groupData) {
+            this.setState((prevState) => ({
+                groups: [...prevState.groups, key],
+            }));
+        }
     }
 
     getChildData = (childData) => {
         console.log(childData);
-        this.setState({ groupName: childData })
+        this.setState({ groupName: childData });
     };
 
     render() {
@@ -37,7 +48,11 @@ class App extends Component {
                                         <Activity />
                                     </Route>
                                     <Route path="/:id" exact>
-                                        <GroupUi groupName={this.state.groupName} />
+                                        {/* {this.state.groups.includes(`${this.props.match.params.id}`)}
+                                        {console.log(this.props.match.params.id)} */}
+                                        <GroupUi
+                                            groupName={this.state.groupName}
+                                        />
                                     </Route>
                                 </Switch>
                             </div>
