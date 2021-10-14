@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import BackDrop from '../UI/BackDrop'
-import  './Expense.css'
+import './Expense.css'
 import Share from './Share'
 import Cards from '../UI/Cards'
 import Paid from './Paid'
+import Group from './Paid'
+
 
 // const user = require('../Store/user.json')
-// const group = require('../Store/group.json')
+const groupList = require('../Store/group.json')
 // const transaction = require('../Store/transaction.json')
 
 class Expense extends Component {
@@ -26,8 +28,15 @@ class Expense extends Component {
             err: '',
             ispayer: false,
             payer: 'you',
-            groupName: ''
+            groupName: [],
+            popGroup: false
         }
+    }
+
+    componentDidMount() {
+        const groups = Object.keys(groupList);
+        this.setState({ groupName: groups })
+
     }
 
     shareHandler = () => {
@@ -44,12 +53,13 @@ class Expense extends Component {
     }
 
     amountHandler = (event) => {
-        const amount = event.target.value;
-        if (!isNaN(amount) && this.state.nameList.length !== 0) {
+        const amount = +event.target.value;
+        if (amount !== 0 && this.state.nameList.length !== 0) {
             const length = this.state.nameList.length;
             this.setState({ amount, shareamount: amount / length, err: '' })
         }
         else {
+            console.log("error")
             this.setState({ err: 'form-control is-invalid', amount: 0, shareamount: 0 })
         }
     }
@@ -93,8 +103,15 @@ class Expense extends Component {
     checkedPayer = (payer) => {
         this.setState((prevState) => ({ payer, ispayer: !prevState.ispayer }))
     }
+    checkedGroup = (group) => {
+        const groupUser=groupList[group].users;
+        console.log(groupUser)
+        this.setState(prevState => ({ group, popGroup: !prevState.popGroup,nameList:groupUser}))
+
+    }
     savehandler = () => {
-        if (this.state.nameList.length >= 2) {
+        console.log(this.state.err)
+        if (this.state.nameList.length >= 2 && this.state.err === '') {
             const payer = this.state.payer === "you" ? this.props.user : this.state.payer;
             const index = this.state.nameList.findIndex((name) => name === payer);
             const owe = this.state.nameList
@@ -108,7 +125,9 @@ class Expense extends Component {
                 expensePop: false
             })
         }
-
+    }
+    groupHandler = () => {
+        this.setState({ popGroup: true })
     }
     render() {
         return (
@@ -166,7 +185,7 @@ class Expense extends Component {
                                 <div className='text-center'>({this.state.shareamount}/person)</div>
                             </div>
                             <div className='btn'>
-                                <button type='button' >{this.state.group}</button>
+                                <button type='button' onClick={this.groupHandler}>{this.state.group}</button>
                             </div>
                         </form>
 
@@ -186,6 +205,7 @@ class Expense extends Component {
                 </BackDrop>
                 {this.state.splitShare && <Share nameList={this.state.nameList} onCheckedName={this.checkedName} />}
                 {this.state.ispayer && <Paid nameList={this.state.nameList} onCheckerPayer={this.checkedPayer} />}
+                {this.state.popGroup && <Group nameList={this.state.groupName} onCheckerPayer={this.checkedGroup} />}
             </>
         )
     }
