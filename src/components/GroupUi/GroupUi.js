@@ -17,9 +17,15 @@ export default class GroupUi extends Component {
         };
     }
 
+    componentDidMount() {
+        this.updateData();
+    }
+
     componentDidUpdate() {
-        // console.log(this.props.groupName);
-        // console.log(groupData);
+        this.updateData();
+    }
+    
+    updateData = () => {
         if (groupData[this.props.groupName]) {
             if (this.props.groupName !== this.state.gname) {
                 this.setState({
@@ -53,22 +59,12 @@ export default class GroupUi extends Component {
                             ],
                             temp: index,
                             gname: this.props.groupName,
-                            // clear: true,
                         }));
                     }
                 }
-                // } else if (this.state.clear) {
-                //     this.setState({
-                //         gname: "",
-                //         paidBy: [],
-                //         amount: [],
-                //         desc: [],
-                //         temp: 0,
-                //         clear: false,
-                //     });
             }
         }
-    }
+    };
 
     render() {
         return (
@@ -99,30 +95,6 @@ export default class GroupUi extends Component {
                         desc={this.state.desc[index]}
                     />
                 ))}
-                {/* <GroupBlock
-                    img={this.state.img1}
-                    paidBy={this.state.paidBy}
-                    amount={this.state.amount}
-                    desc={this.state.desc}
-                />
-                <GroupBlock
-                    img={this.state.img1}
-                    paidBy="aswin"
-                    amount="200"
-                    desc="Food"
-                />
-                <GroupBlock
-                    img={this.state.img1}
-                    paidBy={this.state.paidBy}
-                    amount="500"
-                    desc="Shopping"
-                />
-                <GroupBlock
-                    img={this.state.img1}
-                    paidBy="Aswin"
-                    amount="100"
-                    desc="Snacks"
-                /> */}
             </div>
         );
     }
