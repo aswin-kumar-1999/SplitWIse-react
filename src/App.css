@@ -45,6 +45,7 @@ body {
 .left-links {
     width: 180px;
     padding: 10px;
+    text-decoration: none;
 }
 
 .group-user-tag {
@@ -140,11 +141,7 @@ body {
     font-size: 80%;
 }
 
-.activityBlock:hover {
-    background-color: rgb(246, 244, 244);
-}
-
-.groupBlock:hover {
+.activityBlock:hover, .groupBlock:hover {
     background-color: rgb(246, 244, 244);
 }
 
@@ -156,6 +153,7 @@ body {
     font-size: 80%;
     padding: 10px;
     width: 180px;
+    color: grey;
 }
 
 .users-groups:hover {
@@ -164,10 +162,22 @@ body {
 
 .allExpenses {
     display: flex;
+    color: #07e2b3;
 }
 
 .position-elements {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+}
+
+.navLink {
+    text-decoration: none;
+}
+
+.active {
+    color: rgb(255, 255, 255);
+    background: rgba(236, 236, 236, 0.836);
+    border-left: 8px solid #07e2b3;
+    width: 180px;
 }

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Credit from './Credit'
 import Debt from './Debt'
 import Expense from '../Expense/Expense'
+import Settle from '../Settle/Settle'
 import './Dashboard.css'
 
 const transaction = require('../Store/transaction.json')
@@ -11,12 +12,13 @@ class Dashboard extends Component {
         super(props)
 
         this.state = {
-            expensePop: false,
             user: 'aswin',
             debt: [],
             credit: [],
             lent: 0,
-            owe: 0
+            owe: 0,
+            popExpense: false,
+            popSettle: false
         }
 
     }
@@ -54,10 +56,10 @@ class Dashboard extends Component {
     }
 
     expenseHandler = () => {
-        this.setState((prevState) => ({ expensePop: !prevState.expensePop }))
+        this.setState((prevState) => ({ popExpense: !prevState.popExpense }))
     }
-    newExpensehandler = ({ amount, paid_by, owes, desc, expensePop }) => {
-        console.log(amount, paid_by, owes, desc, expensePop)
+    newExpensehandler = ({ amount, paid_by, owes, desc, popExpense }) => {
+        console.log(amount, paid_by, owes, desc, popExpense)
         if (paid_by === this.state.user) {
             const shareamount = amount / (owes.length + 1);
             const lent = amount - shareamount
@@ -68,7 +70,7 @@ class Dashboard extends Component {
                     shareamount
                 ]],
                 lent: prevState.lent + lent,
-                expensePop
+                popExpense
             }))
         }
         if (owes.includes(this.state.user)) {
@@ -79,10 +81,15 @@ class Dashboard extends Component {
                     shareamount
                 ]],
                 owe: prevState.owe - shareamount,
-                expensePop
+                popExpense
             }))
         }
     }
+
+    settleHandler = () => {
+        this.setState({ popSettle: true })
+    }
+
     render() {
         return (
             <>
@@ -96,7 +103,7 @@ class Dashboard extends Component {
                                 <h3>Dashboard</h3>
                                 <div className="d-flex justify-content-between">
                                     <button type="button" class="btn btn-expense" onClick={this.expenseHandler}>Add an expense</button>
-                                    <button type="button" class="btn btn-settle">Settle up</button>
+                                    <button type="button" class="btn btn-settle" onClick={this.settleHandler}>Settle up</button>
                                 </div>
                             </div>
 
@@ -137,11 +144,14 @@ class Dashboard extends Component {
 
                     </div>
                 </div>
-                {this.state.expensePop &&
+                {this.state.popExpense &&
                     <Expense onBackDrop={this.expenseHandler}
                         onNewExpense={this.newExpensehandler}
                         user={this.state.user}
                     />
+                }
+                {this.state.popSettle &&
+                    <Settle debt={this.state.debt} credit={this.state.credit} />
                 }
             </>
         )

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import Group from "./Group";
 import Users from "./Users";
 const groupData = require("../../data/group.json");
@@ -83,13 +83,13 @@ class LeftPanel extends Component {
     render() {
         return (
             <div className="leftPanel">
-                <Link to='dashboard'>
-                    <div className="left-links allExpenses">
+                 <NavLink activeClassName="active" className="navLink"to='dashboard'>
+                    <div className="left-links allExpenses" >
                         <i className="fa fa-braille" style={{ padding: "5px" }}></i>
                         Dashboard
                     </div>
-                </Link>
-                <Link to="activity">
+                </NavLink>
+                <NavLink activeClassName="active" className="navLink" to="activity">
                     <div className="left-links allExpenses">
                         <i
                             className="fa fa-flag"
@@ -97,7 +97,7 @@ class LeftPanel extends Component {
                         ></i>
                         Recent Activity
                     </div>
-                </Link>
+                </NavLink>
                 <div className="input-group mb-3" style={{ width: "180px" }}>
                     <span className="input-group-text" id="basic-addon1">
                         <i className="fa fa-search"></i>

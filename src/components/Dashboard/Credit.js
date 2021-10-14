@@ -7,7 +7,7 @@ function Credit(props) {
                     src="https://s3.amazonaws.com/splitwise/uploads/user/default_avatars/avatar-ruby36-100px.png"
                     alt="Avatar" className='rounded-circle' width='40px' height='40px'
                 />
-                <div className='px-3 my-2'>{props.name}
+                <div className='px-3 my-1'>{props.name}
                     <div className='credit'>owe you INR {props.amount}</div>
                 </div>
             </div>
