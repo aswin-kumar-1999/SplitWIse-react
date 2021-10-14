@@ -5,16 +5,9 @@ export default class ActivityBlock extends Component {
         super(props);
 
         this.state = {
-            color: "",
+            greenColor: "#07e2b3",
+            redColor: "#ff4000",
         };
-    }
-
-    componentDidMount() {
-        if(this.props.status !== "owe") {
-            this.setState({color: "#07e2b3"})
-        } else {
-            this.setState({color: "#ff4000"})
-        }
     }
 
 
@@ -27,7 +20,15 @@ export default class ActivityBlock extends Component {
                         {this.props.person} added "{this.props.desc}" in "
                         {this.props.group}"
                     </div>
-                    <div className="status-amount" style={{color:this.state.color}}>
+                    <div
+                        className="status-amount"
+                        style={{
+                            color:
+                                this.props.status !== "owe"
+                                    ? this.state.greenColor
+                                    : this.state.redColor,
+                        }}
+                    >
                         you{" "}
                         {this.props.status === "owe" ? (
                             <p>owe</p>

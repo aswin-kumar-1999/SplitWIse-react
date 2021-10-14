@@ -1,22 +1,41 @@
 import React, { Component } from "react";
-// const fs = require("fs").promises;
-// import { Link, Router } from "react-router-dom";
-// import * as group from "../../data/group.json";
-// import * as users from "../../data/users.json";
+import { Link } from "react-router-dom";
 import Group from "./Group";
 import Users from "./Users";
+const groupData = require("../../data/group.json");
+const userData = require("../../data/user.json");
 
 class LeftPanel extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            group: ["Project", "Kashmir"],
-            groupDisplay: ["block", "block"],
-            users: ["Harsh", "Aswin"],
-            usersDisplay: ["block", "block"],
+            group: [],
+            groupDisplay: [],
+            users: [],
+            usersDisplay: [],
             search: "",
         };
+    }
+
+    getChildData = (childData) => {
+        this.props.parentCallback(childData);
+    };
+
+    componentDidMount() {
+        for (let key in groupData) {
+            this.setState((prevState) => ({
+                group: [...prevState.group, key],
+                groupDisplay: [...prevState.groupDisplay, "block"],
+            }));
+        }
+        for (let key in userData) {
+            this.setState((prevState) => ({
+                users: [...prevState.users, key],
+                userDisplay: [...prevState.usersDisplay, "block"],
+            }));
+        }
+        console.log(this.state.group);
     }
 
     componentDidUpdate() {
@@ -42,10 +61,8 @@ class LeftPanel extends Component {
                 return "none";
             }
         });
-        // console.log(newUsersDisplay === this.state.usersDisplay);
-        // console.log(newUsersDisplay, this.state.usersDisplay);
-        // console.log(newGroupDisplay === this.state.groupDisplay);
-        console.log(newUsersDisplay);
+        console.log(groupData);
+        // console.log(userData);
         if (
             JSON.stringify(newUsersDisplay) !==
                 JSON.stringify(this.state.usersDisplay) ||
@@ -61,24 +78,27 @@ class LeftPanel extends Component {
 
     search = (event) => {
         this.setState({ search: event.target.value });
-        // console.log(this.state.search);
     };
 
     render() {
         return (
             <div className="leftPanel">
-                {/* <Link to="/">Home</Link> */}
                 <div className="left-links allExpenses">
-                    <i class="fa fa-braille" style={{ padding: "5px" }}></i>
-                    <div>Dashboard</div>
+                    <i className="fa fa-braille" style={{ padding: "5px" }}></i>
+                    Dashboard
                 </div>
-                <div className="left-links allExpenses">
-                    <i class="fa fa-flag" style={{ padding: "5px" }}></i>
-                    <div>Recent Activity</div>
-                </div>
+                <Link to="activity">
+                    <div className="left-links allExpenses">
+                        <i
+                            className="fa fa-flag"
+                            style={{ padding: "5px" }}
+                        ></i>
+                        Recent Activity
+                    </div>
+                </Link>
                 <div className="input-group mb-3" style={{ width: "180px" }}>
                     <span className="input-group-text" id="basic-addon1">
-                        <i class="fa fa-search"></i>
+                        <i className="fa fa-search"></i>
                     </span>
                     <input
                         type="text"
@@ -90,48 +110,25 @@ class LeftPanel extends Component {
                     />
                 </div>
                 <div className="left-links allExpenses">
-                    <i class="fa fa-list-ul" style={{ padding: "5px" }}></i>
+                    <i className="fa fa-list-ul" style={{ padding: "5px" }}></i>
                     <div>All expensives</div>
                 </div>
-                <div
-                    className="left-links group-user-tag"
-                    // style={{ backgroundColor: "rgb(246, 244, 244)" }}
-                >
-                    Groups
-                </div>
-                {/* {this.state.group.map((gname, index) => {()
+                <div className="left-links group-user-tag">Groups</div>
+                {this.state.group.map((gname, index) => (
                     <Group
                         display={this.state.groupDisplay[index]}
-                        gname={this.state.group[index]}
-                    />;
-                )})} */}
-                <Group
-                    display={this.state.groupDisplay[0]}
-                    gname={this.state.group[0]}
-                />
-                <Group
-                    display={this.state.groupDisplay[1]}
-                    gname={this.state.group[1]}
-                />
+                        gname={gname}
+                        parentCallback={this.getChildData}
+                    />
+                ))}
 
-                <div
-                    className="left-links group-user-tag"
-                    // style={{ backgroundColor: "rgb(246, 244, 244)" }}
-                >
-                    Friends
-                </div>
-                <Users
-                    display={this.state.usersDisplay[0]}
-                    uname={this.state.users[0]}
-                />
-                <Users
-                    display={this.state.usersDisplay[1]}
-                    uname={this.state.users[1]}
-                />
-                {/* <Router>
-                    <Link to="/dashboard">Dashboard</Link>
-                    <Link to="/activity">Recent activity</Link>
-                </Router> */}
+                <div className="left-links group-user-tag">Friends</div>
+                {this.state.users.map((uname, index) => (
+                    <Users
+                        display={this.state.usersDisplay[index]}
+                        uname={uname}
+                    />
+                ))}
             </div>
         );
     }

@@ -9,17 +9,6 @@ export default class Header extends Component {
                         <a className="navbar-brand" href="#" style={{marginLeft:"200px"}}>
                             Splitwise
                         </a>
-                        {/* <button
-                            className="navbar-toggler"
-                            type="button"
-                            data-bs-toggle="collapse"
-                            data-bs-target="#navbarNavDropdown"
-                            aria-controls="navbarNavDropdown"
-                            aria-expanded="false"
-                            aria-label="Toggle navigation"
-                        >
-                            <span className="navbar-toggler-icon"></span>
-                        </button> */}
                         <div
                             className="collapse navbar-collapse  d-flex justify-content-end"
                             id="navbarNavDropdown"
@@ -46,7 +35,7 @@ export default class Header extends Component {
                                                 className="dropdown-item"
                                                 href="#"
                                             >
-                                                a
+                                                Option First
                                             </a>
                                         </li>
                                         <li>
@@ -54,7 +43,7 @@ export default class Header extends Component {
                                                 className="dropdown-item"
                                                 href="#"
                                             >
-                                                b
+                                                Option Second
                                             </a>
                                         </li>
                                         <li>
@@ -62,7 +51,7 @@ export default class Header extends Component {
                                                 className="dropdown-item"
                                                 href="#"
                                             >
-                                                c
+                                                Option Third
                                             </a>
                                         </li>
                                     </ul>

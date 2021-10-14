@@ -1,23 +1,26 @@
 import "./App.css";
 import React, { Component } from "react";
-// import { Route } from "react-router-dom";
-// import Activity from "./components/Activity/Activity";
-// import Dashboard from "./components/Dashboard/Dashboard";
+import { BrowserRouter, Route } from "react-router-dom";
 import LeftPanel from "./components/LeftPanel/LeftPanel";
 import RightPanel from "./components/RightPanel/RightPanel";
-import Container from "./components/Container";
+import Activity from "./components/Activity/Activity";
+import GroupUi from "./components/GroupUi/GroupUi";
 import Header from "./components/Header";
-// import Header from "./components/Header";
-// import { Router } from "react-router";
+import { Switch } from "react-router";
 
 class App extends Component {
-    // constructor(props) {
-    //     super(props);
+    constructor(props) {
+        super(props);
 
-    //     // this.state = {
-    //     //     activityCount: 10,
-    //     // };
-    // }
+        this.state = {
+            groupName: "",
+        };
+    }
+
+    getChildData = (childData) => {
+        console.log(childData);
+        this.setState({ groupName: childData })
+    };
 
     render() {
         return (
@@ -25,12 +28,21 @@ class App extends Component {
                 <Header />
                 <div className="body">
                     <div className="container">
-                        {/* <Router> */}
-                        {/* <Link to="/">Home</Link> */}
-                        <LeftPanel />
-                        <Container />
+                        <BrowserRouter>
+                            <LeftPanel parentCallback={this.getChildData} />
+
+                            <div className="centerPanel">
+                                <Switch>
+                                    <Route path="/activity">
+                                        <Activity />
+                                    </Route>
+                                    <Route path="/:id" exact>
+                                        <GroupUi groupName={this.state.groupName} />
+                                    </Route>
+                                </Switch>
+                            </div>
+                        </BrowserRouter>
                         <RightPanel />
-                        {/* </Router> */}
                     </div>
                 </div>
             </div>
