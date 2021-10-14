@@ -32,10 +32,10 @@ class LeftPanel extends Component {
         for (let key in userData) {
             this.setState((prevState) => ({
                 users: [...prevState.users, key],
-                userDisplay: [...prevState.usersDisplay, "block"],
+                usersDisplay: [...prevState.usersDisplay, "block"],
             }));
         }
-        console.log(this.state.group);
+        // console.log(this.state.group);
     }
 
     componentDidUpdate() {

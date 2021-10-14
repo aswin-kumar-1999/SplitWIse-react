@@ -25,11 +25,12 @@ class Expense extends Component {
             splitShare: false,
             amount: 0,
             description: '',
-            err: '',
+            err: false,
             ispayer: false,
             payer: 'you',
             groupName: [],
-            popGroup: false
+            popGroup: false,
+            nameErr: false
         }
     }
 
@@ -54,13 +55,18 @@ class Expense extends Component {
 
     amountHandler = (event) => {
         const amount = +event.target.value;
-        if (amount !== 0 && this.state.nameList.length !== 0) {
+        if (amount !== 0) {
             const length = this.state.nameList.length;
-            this.setState({ amount, shareamount: amount / length, err: '' })
+            if (this.state.nameList.length !== 0) {
+                this.setState({ amount, shareamount: amount / length, err: false })
+            }
+            else {
+                this.setState({ err: false })
+            }
         }
         else {
             console.log("error")
-            this.setState({ err: 'form-control is-invalid', amount: 0, shareamount: 0 })
+            this.setState({ err: true, amount: 0, shareamount: 0 })
         }
     }
 
@@ -73,7 +79,7 @@ class Expense extends Component {
     }
     formHandler = (event) => {
         event.preventDefault();
-        if (this.state.err === '') {
+        if (!this.state.err) {
             const length = this.state.nameList.length;
             this.setState((prevState) => ({ shareamount: prevState.amount / length }));
             this.props.onNewExpense({})
@@ -101,18 +107,25 @@ class Expense extends Component {
         this.setState((prevState) => ({ ispayer: !prevState.ispayer }))
     }
     checkedPayer = (payer) => {
-        this.setState((prevState) => ({ payer, ispayer: !prevState.ispayer }))
+        if (payer !== '') {
+            this.setState((prevState) => ({ payer, ispayer: !prevState.ispayer }))
+        }
+        else{
+            this.setState((prevState) => ({  ispayer: !prevState.ispayer }))
+        }
     }
     checkedGroup = (group) => {
-        const groupUser=groupList[group].users;
-        console.log(groupUser)
-        this.setState(prevState => ({ group, popGroup: !prevState.popGroup,nameList:groupUser}))
-
+        if (group === '') {
+            const groupUser = groupList[group].users;
+            console.log(groupUser)
+            this.setState(prevState => ({ group, popGroup: !prevState.popGroup, nameList: groupUser }))
+        }
     }
     savehandler = () => {
         console.log(this.state.err)
-        if (this.state.nameList.length >= 2 && this.state.err === '') {
+        if (this.state.nameList.length >= 2 && !this.state.err) {
             const payer = this.state.payer === "you" ? this.props.user : this.state.payer;
+            this.setState({ nameErr: true })
             const index = this.state.nameList.findIndex((name) => name === payer);
             const owe = this.state.nameList
             owe.splice(index, 1);
@@ -122,9 +135,13 @@ class Expense extends Component {
                 paid_by: payer,
                 owes: owe,
                 desc: this.state.description,
-                expensePop: false
+                expensePop: false,
             })
         }
+        if (this.state.nameList.length < 2) {
+            this.setState({ nameErr: true })
+        }
+
     }
     groupHandler = () => {
         this.setState({ popGroup: true })
@@ -148,6 +165,7 @@ class Expense extends Component {
                                     <div className='col-5'> With you and :</div>
                                     <input type='text' className='col-6' placeholder='Enter the name'
                                         onBlur={this.nameHandler} onChange={this.nameChange} value={this.state.name} />
+                                    {this.state.nameErr && <div className='error'>Enter atleast two name</div>}
                                     <div className='d-flex flex-wrap'>
                                         {this.state.nameList.map((name, index) => (
                                             <div key={index} className='m-2 px-2 border border-2 rounded-pill' >
@@ -164,13 +182,12 @@ class Expense extends Component {
                                 <div className='ps-2'>
                                     <input type='text' className='col-9 mb-2'
                                         placeholder='Enter a description' onBlur={this.descriptionHandler}>
-
                                     </input>
                                     <br />
                                     ₹<input type='number'
-                                        className={'col-8' + this.state.err}
+                                        className={'col-8'}
                                         placeholder='0.00' onBlur={this.amountHandler}></input>
-                                    {this.state.err !== '' && <div className='valid-feedback'> enter the proper amount</div>}
+                                    {this.state.err && <div className='error'> enter the proper amount</div>}
                                 </div>
                             </div>
                             <div className='my-2 px-3'>

@@ -17,10 +17,10 @@ class paid extends Component {
         }
     }
     sendPayer = () => {
+       
         this.props.onCheckerPayer(this.state.name)
     }
     render() {
-        { console.log("inside group") }
         return (
             <div className='backdrop'>
                 <div className="share-container">
