@@ -8,7 +8,7 @@ import Group from './Paid'
 
 
 // const user = require('../Store/user.json')
-const groupList = require('../Store/group.json')
+const groupList = require('../../data/group.json')
 // const transaction = require('../Store/transaction.json')
 
 class Expense extends Component {
@@ -139,6 +139,7 @@ class Expense extends Component {
                 owes: owe,
                 desc: this.state.description,
                 expensePop: false,
+                group:this.state.group
             })
         }
         if (this.state.nameList.length < 2) {

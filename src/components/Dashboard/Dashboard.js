@@ -4,8 +4,8 @@ import Debt from './Debt'
 import Expense from '../Expense/Expense'
 import Settle from '../Settle/Settle'
 import './Dashboard.css'
-
-const transaction = require('../Store/transaction.json')
+import { dataStore } from '../Store/Store'
+const transaction = require('../../data/transaction.json')
 
 class Dashboard extends Component {
     constructor(props) {
@@ -18,7 +18,8 @@ class Dashboard extends Component {
             lent: 0,
             owe: 0,
             popExpense: false,
-            popSettle: false
+            popSettle: false,
+            allSettle: false
         }
 
     }
@@ -58,8 +59,8 @@ class Dashboard extends Component {
     expenseHandler = () => {
         this.setState((prevState) => ({ popExpense: !prevState.popExpense }))
     }
-    newExpensehandler = ({ amount, paid_by, owes, desc, popExpense }) => {
-        console.log(amount, paid_by, owes, desc, popExpense)
+    newExpensehandler = ({ amount, paid_by, owes, desc, popExpense,group }) => {
+        console.log("newExpense",amount, paid_by, owes, desc, popExpense,group)
         if (paid_by === this.state.user) {
             const shareamount = amount / (owes.length + 1);
             const lent = amount - shareamount
@@ -84,18 +85,20 @@ class Dashboard extends Component {
                 popExpense
             }))
         }
+        dataStore(amount, paid_by, owes, desc,group);
     }
 
     settleHandler = () => {
         this.setState((prevState) => ({ popSettle: !prevState.popSettle }))
     }
+    settleUpHandler = () => {
+        this.setState((prevState) => ({ popSettle: !prevState.popSettle, debt: [], credit: [], lent: 0, owe: 0 }))
+    }
 
     render() {
         return (
             <>
-                {/* <div className="d-flex justify-content-center content overflow-auto"> */}
                 <div>
-                    {/* <div className="shadow bg-body rounded col-lg-5"> */}
                     <div>
                         <div className="p-3 head">
 
@@ -155,7 +158,7 @@ class Dashboard extends Component {
                         credit={this.state.credit}
                         user={this.state.user}
                         total={this.state.lent + this.state.owe}
-                        onClose={this.settleHandler}
+                        onClose={this.settleUpHandler}
                     />
                 }
             </>
