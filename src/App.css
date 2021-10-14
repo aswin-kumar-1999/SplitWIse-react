@@ -181,3 +181,10 @@ body {
     border-left: 8px solid #07e2b3;
     width: 180px;
 }
+
+.btn-settle-up{
+    background-image: linear-gradient(to right bottom ,#07e2b2af,#07e2b3, rgb(166, 249, 255));
+    border-radius: 50px;
+    color:white;
+    border: none;
+}

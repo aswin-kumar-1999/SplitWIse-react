@@ -110,15 +110,18 @@ class Expense extends Component {
         if (payer !== '') {
             this.setState((prevState) => ({ payer, ispayer: !prevState.ispayer }))
         }
-        else{
-            this.setState((prevState) => ({  ispayer: !prevState.ispayer }))
+        else {
+            this.setState((prevState) => ({ ispayer: !prevState.ispayer }))
         }
     }
     checkedGroup = (group) => {
-        if (group === '') {
+        if (group !== '') {
             const groupUser = groupList[group].users;
             console.log(groupUser)
             this.setState(prevState => ({ group, popGroup: !prevState.popGroup, nameList: groupUser }))
+        }
+        else {
+            this.setState(prevState => ({ popGroup: !prevState.popGroup }))
         }
     }
     savehandler = () => {

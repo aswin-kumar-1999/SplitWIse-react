@@ -87,7 +87,7 @@ class Dashboard extends Component {
     }
 
     settleHandler = () => {
-        this.setState({ popSettle: true })
+        this.setState((prevState) => ({ popSettle: !prevState.popSettle }))
     }
 
     render() {
@@ -151,7 +151,12 @@ class Dashboard extends Component {
                     />
                 }
                 {this.state.popSettle &&
-                    <Settle debt={this.state.debt} credit={this.state.credit} />
+                    <Settle debt={this.state.debt}
+                        credit={this.state.credit}
+                        user={this.state.user}
+                        total={this.state.lent + this.state.owe}
+                        onClose={this.settleHandler}
+                    />
                 }
             </>
         )
