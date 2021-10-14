@@ -10,7 +10,7 @@ export class Settle extends Component {
     }
      
     componentDidMount(){
-        
+        // this.props.
     }
 
     render() {

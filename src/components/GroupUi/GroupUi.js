@@ -18,8 +18,7 @@ export default class GroupUi extends Component {
     }
 
     componentDidUpdate() {
-        // console.log(this.props.groupName);
-        // console.log(groupData);
+
         if (groupData[this.props.groupName]) {
             if (this.props.groupName !== this.state.gname) {
                 this.setState({
@@ -53,19 +52,9 @@ export default class GroupUi extends Component {
                             ],
                             temp: index,
                             gname: this.props.groupName,
-                            // clear: true,
                         }));
                     }
                 }
-                // } else if (this.state.clear) {
-                //     this.setState({
-                //         gname: "",
-                //         paidBy: [],
-                //         amount: [],
-                //         desc: [],
-                //         temp: 0,
-                //         clear: false,
-                //     });
             }
         }
     }
@@ -99,30 +88,6 @@ export default class GroupUi extends Component {
                         desc={this.state.desc[index]}
                     />
                 ))}
-                {/* <GroupBlock
-                    img={this.state.img1}
-                    paidBy={this.state.paidBy}
-                    amount={this.state.amount}
-                    desc={this.state.desc}
-                />
-                <GroupBlock
-                    img={this.state.img1}
-                    paidBy="aswin"
-                    amount="200"
-                    desc="Food"
-                />
-                <GroupBlock
-                    img={this.state.img1}
-                    paidBy={this.state.paidBy}
-                    amount="500"
-                    desc="Shopping"
-                />
-                <GroupBlock
-                    img={this.state.img1}
-                    paidBy="Aswin"
-                    amount="100"
-                    desc="Snacks"
-                /> */}
             </div>
         );
     }
