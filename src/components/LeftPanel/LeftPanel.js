@@ -35,7 +35,6 @@ class LeftPanel extends Component {
                 usersDisplay: [...prevState.usersDisplay, "block"],
             }));
         }
-        // console.log(this.state.group);
     }
 
     componentDidUpdate() {
@@ -61,8 +60,6 @@ class LeftPanel extends Component {
                 return "none";
             }
         });
-        // console.log(groupData);
-        // console.log(userData);
         if (
             JSON.stringify(newUsersDisplay) !==
             JSON.stringify(this.state.usersDisplay) ||
@@ -129,6 +126,7 @@ class LeftPanel extends Component {
                     <Users
                         display={this.state.usersDisplay[index]}
                         uname={uname}
+                        parentCallback={this.getChildData}
                     />
                 ))}
             </div>
