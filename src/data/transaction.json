@@ -1,0 +1,88 @@
+{
+    "last": "24",
+    "1": {
+        "amount": "100",
+        "paid_by": "harsh",
+        "owes": [
+            "aswin"
+        ],
+        "desc": "Food"
+    },
+    "2": {
+        "amount": "300",
+        "paid_by": "harsh",
+        "owes": [
+            "aswin"
+        ],
+        "desc": "Food"
+    },
+    "3": {
+        "amount": "500",
+        "paid_by": "harsh",
+        "owes": [
+            "pravin"
+        ],
+        "desc": "Food"
+    },
+    "4": {
+        "amount": "400",
+        "paid_by": "harsh",
+        "owes": [
+            "pravin"
+        ],
+        "desc": "Food"
+    },
+    "5": {
+        "amount": "400",
+        "paid_by": "harsh",
+        "owes": [
+            "pravin"
+        ],
+        "desc": "Food"
+    },
+    "6": {
+        "amount": "400",
+        "paid_by": "aswin",
+        "owes": [
+            "harsh"
+        ],
+        "desc": "Bus"
+    },
+    "7": {
+        "amount": "100",
+        "paid_by": "aswin",
+        "owes": [
+            "harsh"
+        ],
+        "desc": "Auto"
+    },
+    "8": {
+        "amount": "1000",
+        "paid_by": "aswin",
+        "owes": [
+            "harsh",
+            "pravin"
+        ],
+        "desc": "Travel"
+    },
+    "9": {
+        "amount": "1000",
+        "paid_by": "santhosh",
+        "owes": [
+            "aswin",
+            "shankalp",
+            "harsh"
+        ],
+        "desc": "food"
+    },
+    "10": {
+        "amount": "1000",
+        "paid_by": "shankalp",
+        "owes": [
+            "aswin",
+            "santhosh",
+            "harsh"
+        ],
+        "desc": "food"
+    }
+}

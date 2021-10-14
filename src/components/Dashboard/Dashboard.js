@@ -86,9 +86,10 @@ class Dashboard extends Component {
     render() {
         return (
             <>
-                <div className="d-flex justify-content-center content overflow-auto">
-
-                    <div className="shadow bg-body rounded col-lg-5">
+                {/* <div className="d-flex justify-content-center content overflow-auto"> */}
+                <div>
+                    {/* <div className="shadow bg-body rounded col-lg-5"> */}
+                    <div>
                         <div className="p-3 head">
 
                             <div className="d-flex flex-wrap justify-content-between align-items-center mb-2">
@@ -99,7 +100,7 @@ class Dashboard extends Component {
                                 </div>
                             </div>
 
-                            <div class="container mt-3 border-top border-bottom border-2">
+                            <div class="border-top border-bottom border-2">
                                 <div className="row py-1 fs-6 " >
                                     <div class="col-sm-4 border-end text-center " >
                                         total balance<br /> ₹ {(this.state.lent + this.state.owe).toFixed(2)}
@@ -145,6 +146,7 @@ class Dashboard extends Component {
             </>
         )
     }
+
 }
 
 export default Dashboard
