@@ -61,7 +61,7 @@ class LeftPanel extends Component {
                 return "none";
             }
         });
-        console.log(groupData);
+        // console.log(groupData);
         // console.log(userData);
         if (
             JSON.stringify(newUsersDisplay) !==

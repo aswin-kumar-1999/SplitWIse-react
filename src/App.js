@@ -8,15 +8,32 @@ import Activity from "./components/Activity/Activity";
 import GroupUi from "./components/GroupUi/GroupUi";
 import Header from "./components/Header";
 import { Switch } from "react-router";
+const groupData = require("./data/group.json");
 
 class App extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       groupName: "",
+      groups: [],
     };
   }
+
+  componentDidMount() {
+    // console.log(this.props.match.params.id);
+    for (let key in groupData) {
+      this.setState((prevState) => ({
+        groups: [...prevState.groups, key],
+      }));
+    }
+  }
+
+  getChildData = (childData) => {
+    console.log(childData);
+    this.setState({ groupName: childData });
+
+  };
+
 
   getChildData = (childData) => {
     console.log(childData);
@@ -31,7 +48,6 @@ class App extends Component {
           <div className="container">
             <BrowserRouter>
               <LeftPanel parentCallback={this.getChildData} />
-
               <div className="centerPanel">
                 <Switch>
                   <Route path='/' exact>
@@ -53,7 +69,7 @@ class App extends Component {
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
 

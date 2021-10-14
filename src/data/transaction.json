@@ -1,20 +1,20 @@
 {
-    "last": "24",
+    "last": "10",
     "1": {
-        "amount": "100",
+        "amount": "1000",
         "paid_by": "harsh",
         "owes": [
             "aswin"
         ],
-        "desc": "Food"
+        "desc": "Shopping"
     },
     "2": {
         "amount": "300",
-        "paid_by": "harsh",
+        "paid_by": "pravin",
         "owes": [
             "aswin"
         ],
-        "desc": "Food"
+        "desc": "Cab"
     },
     "3": {
         "amount": "500",
@@ -22,7 +22,7 @@
         "owes": [
             "pravin"
         ],
-        "desc": "Food"
+        "desc": "Books"
     },
     "4": {
         "amount": "400",
@@ -70,14 +70,14 @@
         "paid_by": "santhosh",
         "owes": [
             "aswin",
-            "shankalp",
+            "sankalp",
             "harsh"
         ],
         "desc": "food"
     },
     "10": {
         "amount": "1000",
-        "paid_by": "shankalp",
+        "paid_by": "sankalp",
         "owes": [
             "aswin",
             "santhosh",
