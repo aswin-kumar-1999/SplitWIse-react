@@ -36,14 +36,12 @@ export default class GroupUi extends Component {
                     temp: 0,
                 });
                 for (let index = 1; index <= transactions["last"]; index++) {
-                    console.log(index);
                     if (
                         groupData[this.props.groupName].transaction.includes(
                             index
                         ) &&
                         index !== this.state.temp
                     ) {
-                        console.log(31);
                         this.setState((prevState) => ({
                             paidBy: [
                                 ...prevState.paidBy,
@@ -86,7 +84,6 @@ export default class GroupUi extends Component {
                         <button className="btn-settle">Settle Up</button>
                     </div>
                 </h2>
-                {console.log(this.state.paidBy)}
                 {this.state.paidBy.map((person, index) => (
                     <GroupBlock
                         img={this.state.img1}

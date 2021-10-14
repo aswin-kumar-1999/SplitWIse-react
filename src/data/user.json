@@ -1,9 +1,28 @@
 {
-    "harsh":{
-        "aswin":[1,2],
-        "pravin":[3,4,5]
+    "harsh": {
+        "aswin": [1, 5],
+        "pravin": [3, 4, 5],
+        "owes": ["aswin", "debkanta", "sankalp"]
     },
-    "aswin":{
-        "harsh":[7,6]
+    "aswin": {
+        "harsh": [6, 7, 8],
+        "pravin": [8],
+        "owes": ["harsh", "pravin", "debkanta", "sankalp"]
+    },
+    "pravin": {
+        "aswin": [2],
+        "owes": ["harsh", "aswin"]
+    },
+    "debkanta": {
+        "aswin": [9],
+        "sankalp": [9],
+        "harsh": [9],
+        "owes": ["sankalp"]
+    },
+    "sankalp": {
+        "aswin": [10],
+        "debkanta": [10],
+        "harsh": [10],
+        "owes": ["debkanta"]
     }
 }

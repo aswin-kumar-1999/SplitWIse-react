@@ -4,9 +4,9 @@ import { BrowserRouter, Route } from "react-router-dom";
 import LeftPanel from "./components/LeftPanel/LeftPanel";
 import RightPanel from "./components/RightPanel/RightPanel";
 import Activity from "./components/Activity/Activity";
-import GroupUi from "./components/GroupUi/GroupUi";
 import Header from "./components/Header";
 import { Switch } from "react-router";
+import CenterDisplay from "./components/CenterDisplay";
 const groupData = require("./data/group.json");
 
 class App extends Component {
@@ -14,13 +14,12 @@ class App extends Component {
         super(props);
 
         this.state = {
-            groupName: "",
+            displayName: "",
             groups: [],
         };
     }
 
     componentDidMount() {
-        // console.log(this.props.match.params.id);
         for (let key in groupData) {
             this.setState((prevState) => ({
                 groups: [...prevState.groups, key],
@@ -29,8 +28,7 @@ class App extends Component {
     }
 
     getChildData = (childData) => {
-        console.log(childData);
-        this.setState({ groupName: childData });
+        this.setState({ displayName: childData });
     };
 
     render() {
@@ -47,13 +45,17 @@ class App extends Component {
                                     <Route path="/activity">
                                         <Activity />
                                     </Route>
-                                    <Route path="/:id" exact>
-                                        {/* {this.state.groups.includes(`${this.props.match.params.id}`)}
-                                        {console.log(this.props.match.params.id)} */}
-                                        <GroupUi
-                                            groupName={this.state.groupName}
-                                        />
-                                    </Route>
+                                    <Route
+                                        path="/:id"
+                                        render={(props) => (
+                                            <CenterDisplay
+                                                {...props}
+                                                displayName={
+                                                    this.state.displayName
+                                                }
+                                            />
+                                        )}
+                                    />
                                 </Switch>
                             </div>
                         </BrowserRouter>

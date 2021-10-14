@@ -3,86 +3,61 @@
     "1": {
         "amount": "1000",
         "paid_by": "harsh",
-        "owes": [
-            "aswin"
-        ],
+        "owes": ["aswin"],
         "desc": "Shopping"
     },
     "2": {
         "amount": "300",
         "paid_by": "pravin",
-        "owes": [
-            "aswin"
-        ],
+        "owes": ["aswin"],
         "desc": "Cab"
     },
     "3": {
         "amount": "500",
         "paid_by": "harsh",
-        "owes": [
-            "pravin"
-        ],
+        "owes": ["pravin"],
         "desc": "Books"
     },
     "4": {
         "amount": "400",
         "paid_by": "harsh",
-        "owes": [
-            "pravin"
-        ],
+        "owes": ["pravin"],
         "desc": "Food"
     },
     "5": {
         "amount": "400",
         "paid_by": "harsh",
-        "owes": [
-            "pravin"
-        ],
+        "owes": ["pravin", "aswin"],
         "desc": "Food"
     },
     "6": {
         "amount": "400",
         "paid_by": "aswin",
-        "owes": [
-            "harsh"
-        ],
+        "owes": ["harsh"],
         "desc": "Bus"
     },
     "7": {
         "amount": "100",
         "paid_by": "aswin",
-        "owes": [
-            "harsh"
-        ],
+        "owes": ["harsh"],
         "desc": "Auto"
     },
     "8": {
         "amount": "1000",
         "paid_by": "aswin",
-        "owes": [
-            "harsh",
-            "pravin"
-        ],
+        "owes": ["harsh", "pravin"],
         "desc": "Travel"
     },
     "9": {
         "amount": "1000",
-        "paid_by": "santhosh",
-        "owes": [
-            "aswin",
-            "sankalp",
-            "harsh"
-        ],
-        "desc": "food"
+        "paid_by": "debkanta",
+        "owes": ["aswin", "sankalp", "harsh"],
+        "desc": "Snacks"
     },
     "10": {
-        "amount": "1000",
+        "amount": "3000",
         "paid_by": "sankalp",
-        "owes": [
-            "aswin",
-            "santhosh",
-            "harsh"
-        ],
-        "desc": "food"
+        "owes": ["aswin", "debkanta", "harsh"],
+        "desc": "Hotel"
     }
 }
