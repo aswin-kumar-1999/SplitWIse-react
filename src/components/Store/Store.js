@@ -2,7 +2,10 @@ export const transaction = require('../../data/transaction.json');
 export const group = require('../../data/group.json');
 export const user = require('../../data/user.json');
 
-
+// function forClosure() {
+//     let lastTransaction = transaction.last + 1;
+//     return invokeClosure = ()
+// }
 
 export const dataStore = (amount, paid_by, owes, desc, groupName) => {
     const lastTransaction = +transaction.last + 1;

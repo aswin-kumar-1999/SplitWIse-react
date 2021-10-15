@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import GroupBlock from "./GroupBlock";
-const groupData = require("../../data/group.json");
-const transactions = require("../../data/transaction.json");
+// const groupData = require("../../data/group.json");
+// const transactions = require("../../data/transaction.json");
+import { transaction as transactions, group as groupData } from "../Store/Store";
 
 export default class GroupUi extends Component {
     constructor(props) {
@@ -35,7 +36,7 @@ export default class GroupUi extends Component {
                     desc: [],
                     temp: 0,
                 });
-                for (let index = 1; index <= transactions["last"]; index++) {
+                for (let index = 1; index <= transactions["last"]+1; index++) {
                     if (
                         groupData[this.props.groupName].transaction.includes(
                             index

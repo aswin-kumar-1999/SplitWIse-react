@@ -55,8 +55,30 @@ body {
 .rightPanel {
     width: 200px;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
     /* border-left: none;
     border: 1px solid black; */
+}
+
+.rightPanelHead {
+    width: 180px;
+    height: 63px;
+    margin-top: 0%;
+    margin-bottom: 0%;
+    padding: 10px;
+    background-color: rgba(236, 236, 236, 0.836);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.displayGroupMembers {
+    width: 180px;
+    padding: 10px;
+    display: flex;
+    justify-content: flex-start;
 }
 
 .activityHead {
@@ -141,7 +163,8 @@ body {
     font-size: 80%;
 }
 
-.activityBlock:hover, .groupBlock:hover {
+.activityBlock:hover,
+.groupBlock:hover {
     background-color: rgb(246, 244, 244);
 }
 
@@ -182,9 +205,14 @@ body {
     width: 180px;
 }
 
-.btn-settle-up{
-    background-image: linear-gradient(to right bottom ,#07e2b2af,#07e2b3, rgb(166, 249, 255));
+.btn-settle-up {
+    background-image: linear-gradient(
+        to right bottom,
+        #07e2b2af,
+        #07e2b3,
+        rgb(166, 249, 255)
+    );
     border-radius: 50px;
-    color:white;
+    color: white;
     border: none;
 }
