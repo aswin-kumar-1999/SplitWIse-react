@@ -1,82 +1,55 @@
-export const transaction = require('../../data/transaction.json');
-export const group = require('../../data/group.json');
-export const user = require('../../data/user.json');
+let updateTransaction = undefined;
+let updateGroup = undefined;
+let updateUser = undefined;
+let lastTransaction = 0;
 
-// function forClosure() {
-//     let last = transaction.last + 1
-//     return data = (amount, paid_by, owes, desc, groupName) => {
-//         const lastTransaction = last;
-//         last += 1;
-//         transaction[last] = {
-//             amount,
-//             paid_by,
-//             owes,
-//             desc,
-//             last: +transaction.last + 1
-//         }
-//         if (groupName === 'No group') {
-//             for (let name of owes) {
+export const transaction = updateTransaction ?? require('../../data/transaction.json');
+export const group = updateGroup ?? require('../../data/group.json');
+export const user = updateUser ?? require('../../data/user.json');
 
-//                 user[paid_by] = {
-//                     [name]: user[paid_by].name ?? [],
-//                     owes: user[paid_by].owes ?? []
-//                 }
-//                 user[paid_by] = {
-//                     [name]: [...user[paid_by][name], lastTransaction]
-//                 }
-
-//                 user[name] = user[name] ?? {};
-//                 user[name] = {
-//                     owes: user[name].owes ?? []
-//                 }
-//                 user[name] = {
-//                     owes: [...user[name].owes, paid_by]
-//                 }
-//             }
-//         }
-//         else {
-//             group[groupName] = {
-//                 transaction: [...group[groupName].transaction, lastTransaction],
-//                 users: [...group[groupName].users]
-//             }
-//         }
-//     }
-// }
-// const data = forClosure();
-// export const dataStore =data()
 export const dataStore = (amount, paid_by, owes, desc, groupName) => {
-    const lastTransaction = +transaction.last + 1;
-    transaction[lastTransaction] = {
+
+    if (updateTransaction === undefined) {
+        console.log("unpdate empty")
+        lastTransaction = +transaction.last
+        updateTransaction = transaction;
+        updateGroup = group;
+        updateUser = user;
+    }
+    
+    lastTransaction += 1;
+    console.log("last Transaction",lastTransaction)
+    updateTransaction[lastTransaction] = {
         amount,
         paid_by,
         owes,
-        desc,
-        last:+transaction.last +1
+        desc
     }
+    updateTransaction.last=lastTransaction;
     if (groupName === 'No group') {
         for (let name of owes) {
 
-            user[paid_by] = {
-                [name]: user[paid_by].name ?? [],
-                owes: user[paid_by].owes ?? []
+            updateUser[paid_by] = {
+                [name]: updateUser[paid_by].name ?? [],
+                owes: updateUser[paid_by].owes ?? []
             }
-            user[paid_by] = {
-                [name]: [...user[paid_by][name], lastTransaction]
+            updateUser[paid_by] = {
+                [name]: [...updateUser[paid_by][name], lastTransaction]
             }
 
-            user[name] = user[name] ?? {};
-            user[name] = {
-                owes: user[name].owes ?? []
+            updateUser[name] = updateUser[name] ?? {};
+            updateUser[name] = {
+                owes: updateUser[name].owes ?? []
             }
-            user[name] = {
-                owes: [...user[name].owes, paid_by]
+            updateUser[name] = {
+                owes: [...updateUser[name].owes, paid_by]
             }
         }
     }
     else {
-        group[groupName] = {
-            transaction: [...group[groupName].transaction, lastTransaction],
-            users:[...group[groupName].users]
+        updateGroup[groupName] = {
+            transaction: [...updateGroup[groupName].transaction, lastTransaction],
+            users: [...updateGroup[groupName].users]
         }
     }
 
