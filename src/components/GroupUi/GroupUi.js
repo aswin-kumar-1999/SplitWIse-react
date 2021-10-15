@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import GroupBlock from "./GroupBlock";
 const groupData = require("../../data/group.json");
 const transactions = require("../../data/transaction.json");
-
+// import { transaction as transactions} from '../Store/Store'
 export default class GroupUi extends Component {
     constructor(props) {
         super(props);
@@ -23,6 +23,7 @@ export default class GroupUi extends Component {
 
     componentDidUpdate() {
         this.updateData();
+        // console.log("Transaction",transactions)
     }
 
     updateData = () => {

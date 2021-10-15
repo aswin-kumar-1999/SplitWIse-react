@@ -182,9 +182,28 @@ body {
     width: 180px;
 }
 
-.btn-settle-up{
-    background-image: linear-gradient(to right bottom ,#07e2b2af,#07e2b3, rgb(166, 249, 255));
+.btn-settle-up {
+    background-image: linear-gradient(to right bottom, #07e2b2af, #07e2b3, rgb(166, 249, 255));
     border-radius: 50px;
-    color:white;
+    color: white;
     border: none;
+}
+.mobile{
+    display: none;
+}
+@media screen and (max-width:1000px) {
+    .container{
+        width: 100vw;
+        margin: 0;
+        padding: 0;
+    }
+    .centerPanel {
+        min-width: 350px;
+    }
+    .mobile{
+        display: block;
+    }
+    .lapview{
+        display: none;
+    }
 }

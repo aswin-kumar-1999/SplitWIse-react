@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import BackDrop from '../UI/BackDrop';
 import Cards from '../UI/Cards';
-
+import {transaction,group,user} from '../Store/Store'
 import './Settle.css'
 export class Settle extends Component {
     constructor(props) {
@@ -45,6 +45,10 @@ export class Settle extends Component {
         }, 2000)
     }
     render() {
+        {console.log('User',user)
+        console.log("Transation",transaction)
+        console.log("Group",group)
+    }
         return (
             <BackDrop>
                 <Cards>

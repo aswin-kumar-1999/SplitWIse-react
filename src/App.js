@@ -38,7 +38,19 @@ class App extends Component {
         <div className="body">
           <div className="container">
             <BrowserRouter>
-              <LeftPanel parentCallback={this.getChildData} />
+              <div className='mobile'>
+                <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel" style={{width:'200px'}}>
+                  <div class="offcanvas-header">
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                  </div>
+                  <div class="offcanvas-body" >
+                    <LeftPanel parentCallback={this.getChildData} />
+                  </div>
+                </div>
+              </div>
+              <div className='lapview'>
+                <LeftPanel parentCallback={this.getChildData} />
+              </div>
               <div className="centerPanel">
                 <Switch>
                   <Route path='/' exact>
@@ -64,7 +76,9 @@ class App extends Component {
                 </Switch>
               </div>
             </BrowserRouter>
-            <RightPanel />
+            <div className='lapview'>
+              <RightPanel />
+            </div>
           </div>
         </div>
       </div>
