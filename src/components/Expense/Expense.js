@@ -65,7 +65,7 @@ class Expense extends Component {
             }
         }
         else {
-            console.log("error")
+            // console.log("error")
             this.setState({ err: true, amount: 0, shareamount: 0 })
         }
     }
@@ -107,11 +107,12 @@ class Expense extends Component {
         this.setState((prevState) => ({ ispayer: !prevState.ispayer }))
     }
     checkedPayer = (payer) => {
+        console.log("Checked Payer",payer)
         if (payer !== '') {
             this.setState((prevState) => ({ payer, ispayer: !prevState.ispayer }))
         }
         else {
-            this.setState((prevState) => ({ ispayer: !prevState.ispayer }))
+            this.setState((prevState) => ({ ispayer: !prevState.ispayer ,payer:this.props.user}))
         }
     }
     checkedGroup = (group) => {
@@ -129,10 +130,10 @@ class Expense extends Component {
         if (this.state.nameList.length >= 2 && !this.state.err) {
             const payer = this.state.payer === "you" ? this.props.user : this.state.payer;
             this.setState({ nameErr: true })
-            const index = this.state.nameList.findIndex((name) => name === payer);
-            const owe = this.state.nameList
-            owe.splice(index, 1);
-            console.log(owe)
+            const owe = this.state.nameList.filter((name) => name !== payer);
+            // const owe = this.state.nameList
+            // owe.splice(index, 1);
+            // console.log(owe)
             this.props.onNewExpense({
                 amount: this.state.amount,
                 paid_by: payer,

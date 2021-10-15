@@ -18,7 +18,6 @@ export const dataStore = (amount, paid_by, owes, desc, groupName) => {
     }
     
     lastTransaction += 1;
-    console.log("last Transaction",lastTransaction)
     updateTransaction[lastTransaction] = {
         amount,
         paid_by,
@@ -28,7 +27,7 @@ export const dataStore = (amount, paid_by, owes, desc, groupName) => {
     updateTransaction.last=lastTransaction;
     if (groupName === 'No group') {
         for (let name of owes) {
-
+            updateUser[paid_by]= updateUser[paid_by] ?? {}
             updateUser[paid_by] = {
                 [name]: updateUser[paid_by].name ?? [],
                 owes: updateUser[paid_by].owes ?? []

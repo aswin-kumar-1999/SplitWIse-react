@@ -4,8 +4,7 @@ import Debt from './Debt'
 import Expense from '../Expense/Expense'
 import Settle from '../Settle/Settle'
 import './Dashboard.css'
-import { dataStore } from '../Store/Store'
-const transaction = require('../../data/transaction.json')
+import { dataStore, transaction } from '../Store/Store'
 
 class Dashboard extends Component {
     constructor(props) {
@@ -19,22 +18,32 @@ class Dashboard extends Component {
             owe: 0,
             popExpense: false,
             popSettle: false,
-            allSettle: false
+            allSettle: false,
+            lastTransaction: 0
         }
 
     }
     componentDidMount() {
-        this.dataExtraction();
+        this.setState({ lastTransaction: transaction.last })
+        // this.dataExtraction();
+    }
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState.lastTransaction !== transaction.last) {
+            console.log("Update")
+            this.setState({ lastTransaction: transaction.last })
+            this.dataExtraction();
+        }
     }
     dataExtraction = () => {
         const user = this.state.user;
-        // console.log(transaction[1])
-        for (let index = 1; index < transaction.last; index++) {
+        console.log(transaction)
+        this.setState({ credit: [], debt: [] })
+        for (let index = 1; index <= transaction.last; index++) {
             if (transaction[index].paid_by === user) {
                 const shareamount = +transaction[index].amount / (transaction[index].owes.length + 1);
                 const lent = +transaction[index].amount - shareamount
                 const owesName = transaction[index].owes.join(', ')
-                console.log(shareamount, lent, owesName)
+                // console.log(shareamount, lent, owesName)
                 this.setState(prevState => ({
                     credit: [...prevState.credit, [
                         owesName,
@@ -60,7 +69,7 @@ class Dashboard extends Component {
         this.setState((prevState) => ({ popExpense: !prevState.popExpense }))
     }
     newExpensehandler = ({ amount, paid_by, owes, desc, popExpense, group }) => {
-        console.log("newExpense", amount, paid_by, owes, desc, popExpense, group)
+        // console.log("newExpense", amount, paid_by, owes, desc, popExpense, group)
         if (paid_by === this.state.user) {
             const shareamount = amount / (owes.length + 1);
             const lent = amount - shareamount
@@ -71,7 +80,7 @@ class Dashboard extends Component {
                     shareamount
                 ]],
                 lent: prevState.lent + lent,
-                popExpense
+                // popExpense
             }))
         }
         if (owes.includes(this.state.user)) {
@@ -82,9 +91,11 @@ class Dashboard extends Component {
                     shareamount
                 ]],
                 owe: prevState.owe - shareamount,
-                popExpense
+                // popExpense
             }))
         }
+        this.setState({ popExpense })
+        this.dataExtraction();
         dataStore(amount, paid_by, owes, desc, group);
     }
 

@@ -12,7 +12,7 @@ class paid extends Component {
     }
     payerhandler = (event) => {
         if (event.target.checked) {
-            console.log("Payer", event.target.value)
+            // console.log("Payer", event.target.value)
             this.setState({ name: event.target.value })
         }
     }
