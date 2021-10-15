@@ -5,13 +5,15 @@ import Expense from '../Expense/Expense'
 import Settle from '../Settle/Settle'
 import './Dashboard.css'
 import { dataStore, transaction } from '../Store/Store'
+import { connect } from "react-redux";
+import { updateUser } from '../../redux/actions';
 
 class Dashboard extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            user: 'aswin',
+            // user: 'aswin',
             debt: [],
             credit: [],
             lent: 0,
@@ -28,6 +30,12 @@ class Dashboard extends Component {
         // this.dataExtraction();
     }
     componentDidUpdate(prevProps, prevState) {
+        if (prevProps.user !== this.props.user) {
+            { console.log("redux", this.props.user) }
+            // this.setState({user:this.props.user})
+            this.dataExtraction();
+
+        }
         if (prevState.lastTransaction !== transaction.last) {
             console.log("Update")
             this.setState({ lastTransaction: transaction.last })
@@ -35,7 +43,7 @@ class Dashboard extends Component {
         }
     }
     dataExtraction = () => {
-        const user = this.state.user;
+        const user = this.props.user;
         console.log(transaction)
         this.setState({ credit: [], debt: [] })
         for (let index = 1; index <= transaction.last; index++) {
@@ -70,7 +78,7 @@ class Dashboard extends Component {
     }
     newExpensehandler = ({ amount, paid_by, owes, desc, popExpense, group }) => {
         // console.log("newExpense", amount, paid_by, owes, desc, popExpense, group)
-        if (paid_by === this.state.user) {
+        if (paid_by === this.props.user) {
             const shareamount = amount / (owes.length + 1);
             const lent = amount - shareamount
             const owesName = owes.join(', ')
@@ -83,7 +91,7 @@ class Dashboard extends Component {
                 // popExpense
             }))
         }
-        if (owes.includes(this.state.user)) {
+        if (owes.includes(this.props.user)) {
             const shareamount = amount / (owes.length + 1);
             this.setState(prevState => ({
                 debt: [...prevState.debt, [
@@ -174,13 +182,13 @@ class Dashboard extends Component {
                 {this.state.popExpense &&
                     <Expense onBackDrop={this.expenseHandler}
                         onNewExpense={this.newExpensehandler}
-                        user={this.state.user}
+                        user={this.props.user}
                     />
                 }
                 {this.state.popSettle &&
                     <Settle debt={this.state.debt}
                         credit={this.state.credit}
-                        user={this.state.user}
+                        user={this.props.user}
                         total={this.state.lent + this.state.owe}
                         onClose={this.settleUpHandler}
                     />
@@ -191,4 +199,17 @@ class Dashboard extends Component {
 
 }
 
-export default Dashboard
+const mapStateToProps = (state) => {
+    return {
+        user: state.user
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        updateUser: (payload) => {
+            return dispatch(updateUser(payload))
+        }
+    };
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
