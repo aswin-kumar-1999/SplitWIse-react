@@ -95,8 +95,8 @@ class Dashboard extends Component {
         if (isSettled) {
             this.setState((prevState) => ({ popSettle: !prevState.popSettle, debt: [], credit: [], lent: 0, owe: 0 }))
         }
-        else{
-            this.setState((prevState) => ({ popSettle: !prevState.popSettle}))
+        else {
+            this.setState((prevState) => ({ popSettle: !prevState.popSettle }))
         }
     }
 
@@ -118,13 +118,21 @@ class Dashboard extends Component {
                             <div className="border-top border-bottom border-2">
                                 <div className="row py-1 fs-6 " >
                                     <div className="col-sm-4 border-end text-center " >
-                                        total balance<br /> ₹ {(this.state.lent + this.state.owe).toFixed(2)}
+                                        total balance<br />  {this.state.lent < this.state.owe && (
+                                            <span className='credit'> ₹ {(this.state.lent + this.state.owe).toFixed(2)} </span>
+                                        )}
+                                        {this.state.lent > this.state.owe && (
+                                            <span className='debt'> ₹ {(this.state.lent + this.state.owe).toFixed(2) * -1} </span>
+                                        )}
                                     </div>
                                     <div className="col-sm-4 border-end text-center">
-                                        you owe <br /> ₹ {this.state.owe.toFixed(2)}
+                                        <div> you owe  <span className='debt'>   <br /> ₹ {this.state.owe.toFixed(2) * -1} </span>
+                                        </div>
                                     </div>
                                     <div className="col-sm-4 text-center">
-                                        you are owed <br /> ₹ {this.state.lent.toFixed(2)}
+                                        <div> you are owed
+                                            <span className='credit'> <br /> ₹ {this.state.lent.toFixed(2)} </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

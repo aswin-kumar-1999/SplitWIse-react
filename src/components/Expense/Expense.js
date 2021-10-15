@@ -203,7 +203,7 @@ class Expense extends Component {
                                     </span> and split
                                     <span className='share' onClick={this.shareHandler}> {this.state.share}</span>
                                 </div>
-                                <div className='text-center'>({this.state.shareamount}/person)</div>
+                                <div className='text-center'>({this.state.shareamount.toFixed(2)}/person)</div>
                             </div>
                             <div className='btn'>
                                 <button type='button' onClick={this.groupHandler}>{this.state.group}</button>
