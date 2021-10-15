@@ -34,7 +34,8 @@ export const dataStore = (amount, paid_by, owes, desc, groupName) => {
     }
     else {
         group[groupName] = {
-            transaction: [...group[groupName].transaction, lastTransaction]
+            transaction: [...group[groupName].transaction, lastTransaction],
+            users:[...group[groupName].users]
         }
     }
 
