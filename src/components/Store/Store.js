@@ -10,7 +10,8 @@ export const dataStore = (amount, paid_by, owes, desc, groupName) => {
         amount,
         paid_by,
         owes,
-        desc
+        desc,
+        last:lastTransaction
     }
     if (groupName === 'No group') {
         for (let name of owes) {
