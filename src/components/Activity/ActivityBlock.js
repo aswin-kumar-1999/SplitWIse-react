@@ -13,15 +13,15 @@ export default class ActivityBlock extends Component {
 
     render() {
         return (
-            <div className="activityBlock">
+            <div className="activityBlock d-flex justify-content-start align-items-center">
                 <img src={this.props.img} alt="%" height="50px" width="50px" />
-                <div className="activityText">
+                <div className="activityText d-flex flex-column">
                     <div>
                         {this.props.person} added "{this.props.desc}" in "
                         {this.props.group}"
                     </div>
                     <div
-                        className="status-amount"
+                        className="status-amount d-flex"
                         style={{
                             color:
                                 this.props.status !== "owe"
