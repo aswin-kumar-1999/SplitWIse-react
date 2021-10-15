@@ -59,8 +59,8 @@ class Dashboard extends Component {
     expenseHandler = () => {
         this.setState((prevState) => ({ popExpense: !prevState.popExpense }))
     }
-    newExpensehandler = ({ amount, paid_by, owes, desc, popExpense,group }) => {
-        console.log("newExpense",amount, paid_by, owes, desc, popExpense,group)
+    newExpensehandler = ({ amount, paid_by, owes, desc, popExpense, group }) => {
+        console.log("newExpense", amount, paid_by, owes, desc, popExpense, group)
         if (paid_by === this.state.user) {
             const shareamount = amount / (owes.length + 1);
             const lent = amount - shareamount
@@ -85,14 +85,19 @@ class Dashboard extends Component {
                 popExpense
             }))
         }
-        dataStore(amount, paid_by, owes, desc,group);
+        dataStore(amount, paid_by, owes, desc, group);
     }
 
     settleHandler = () => {
         this.setState((prevState) => ({ popSettle: !prevState.popSettle }))
     }
-    settleUpHandler = () => {
-        this.setState((prevState) => ({ popSettle: !prevState.popSettle, debt: [], credit: [], lent: 0, owe: 0 }))
+    settleUpHandler = (isSettled) => {
+        if (isSettled) {
+            this.setState((prevState) => ({ popSettle: !prevState.popSettle, debt: [], credit: [], lent: 0, owe: 0 }))
+        }
+        else{
+            this.setState((prevState) => ({ popSettle: !prevState.popSettle}))
+        }
     }
 
     render() {
@@ -105,20 +110,20 @@ class Dashboard extends Component {
                             <div className="d-flex flex-wrap justify-content-between align-items-center mb-2">
                                 <h3>Dashboard</h3>
                                 <div className="d-flex justify-content-between">
-                                    <button type="button" class="btn btn-expense" onClick={this.expenseHandler}>Add an expense</button>
-                                    <button type="button" class="btn btn-settle" onClick={this.settleHandler}>Settle up</button>
+                                    <button type="button" className="btn btn-expense" onClick={this.expenseHandler}>Add an expense</button>
+                                    <button type="button" className="btn btn-settle" onClick={this.settleHandler}>Settle up</button>
                                 </div>
                             </div>
 
-                            <div class="border-top border-bottom border-2">
+                            <div className="border-top border-bottom border-2">
                                 <div className="row py-1 fs-6 " >
-                                    <div class="col-sm-4 border-end text-center " >
+                                    <div className="col-sm-4 border-end text-center " >
                                         total balance<br /> ₹ {(this.state.lent + this.state.owe).toFixed(2)}
                                     </div>
-                                    <div class="col-sm-4 border-end text-center">
+                                    <div className="col-sm-4 border-end text-center">
                                         you owe <br /> ₹ {this.state.owe.toFixed(2)}
                                     </div>
-                                    <div class="col-sm-4 text-center">
+                                    <div className="col-sm-4 text-center">
                                         you are owed <br /> ₹ {this.state.lent.toFixed(2)}
                                     </div>
                                 </div>
@@ -133,12 +138,12 @@ class Dashboard extends Component {
                         </div>
 
                         <div className="d-flex ">
-                            <span class="border-end border-1 col-6">
+                            <span className="border-end border-1 col-6">
                                 {this.state.debt.map((data, index) => (
                                     <Debt key={index} name={data[0]} amount={data[1].toFixed(2)} />
                                 ))}
                             </span>
-                            <span class="border-start border-1 col-6 " >
+                            <span className="border-start border-1 col-6 " >
                                 {this.state.credit.map((data, index) => (
                                     <Credit key={index} name={data[0]} amount={data[1].toFixed(2)} />
                                 ))}

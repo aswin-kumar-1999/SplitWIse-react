@@ -80,7 +80,7 @@ class LeftPanel extends Component {
     render() {
         return (
             <div className="leftPanel">
-                 <NavLink activeClassName="active" className="navLink"to='dashboard'>
+                <NavLink activeClassName="active" className="navLink" to='dashboard'>
                     <div className="left-links allExpenses" >
                         <i className="fa fa-braille" style={{ padding: "5px" }}></i>
                         Dashboard
@@ -115,6 +115,7 @@ class LeftPanel extends Component {
                 <div className="left-links group-user-tag">Groups</div>
                 {this.state.group.map((gname, index) => (
                     <Group
+                        key={index}
                         display={this.state.groupDisplay[index]}
                         gname={gname}
                         parentCallback={this.getChildData}
@@ -124,6 +125,7 @@ class LeftPanel extends Component {
                 <div className="left-links group-user-tag">Friends</div>
                 {this.state.users.map((uname, index) => (
                     <Users
+                        key={index}
                         display={this.state.usersDisplay[index]}
                         uname={uname}
                         parentCallback={this.getChildData}

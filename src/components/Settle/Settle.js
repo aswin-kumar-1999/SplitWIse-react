@@ -34,6 +34,9 @@ export class Settle extends Component {
     closeHandler = () => {
         this.props.onClose();
     }
+    settledUpHandler=()=>{
+        this.props.onClose(true)
+    }
     settleHandler = () => {
         this.setState({ isSpinner: 1 })
         setTimeout(() => {
@@ -94,7 +97,7 @@ export class Settle extends Component {
                         <div className=''>
                             <header className='header d-flex justify-content-between align-items-center rounded-top px-2'>
                                 <h4>Settle Up</h4>
-                                <i className="fas fa-times" onClick={this.closeHandler}></i>
+                                <i className="fas fa-times" onClick={this.settledUpHandler}></i>
                             </header>
                             <h2>Settled Up</h2>
                         </div>

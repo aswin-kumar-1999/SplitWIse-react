@@ -24,7 +24,7 @@ export default class GroupUi extends Component {
     componentDidUpdate() {
         this.updateData();
     }
-    
+
     updateData = () => {
         if (groupData[this.props.groupName]) {
             if (this.props.groupName !== this.state.gname) {
@@ -86,6 +86,7 @@ export default class GroupUi extends Component {
                 </h2>
                 {this.state.paidBy.map((person, index) => (
                     <GroupBlock
+                        key={index}
                         img={this.state.img1}
                         paidBy={person}
                         amount={this.state.amount[index]}
