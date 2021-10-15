@@ -107,12 +107,12 @@ class Expense extends Component {
         this.setState((prevState) => ({ ispayer: !prevState.ispayer }))
     }
     checkedPayer = (payer) => {
-        console.log("Checked Payer",payer)
+        console.log("Checked Payer", payer)
         if (payer !== '') {
             this.setState((prevState) => ({ payer, ispayer: !prevState.ispayer }))
         }
         else {
-            this.setState((prevState) => ({ ispayer: !prevState.ispayer ,payer:this.props.user}))
+            this.setState((prevState) => ({ ispayer: !prevState.ispayer, payer: this.props.user }))
         }
     }
     checkedGroup = (group) => {
@@ -140,7 +140,7 @@ class Expense extends Component {
                 owes: owe,
                 desc: this.state.description,
                 expensePop: false,
-                group:this.state.group
+                group: this.state.group
             })
         }
         if (this.state.nameList.length < 2) {
@@ -207,7 +207,7 @@ class Expense extends Component {
                                 <div className='text-center'>({this.state.shareamount.toFixed(2)}/person)</div>
                             </div>
                             <div className='btn'>
-                                <button type='button' onClick={this.groupHandler}>{this.state.group}</button>
+                                <button type='button' className='px-3 my-1 rounded-pill' onClick={this.groupHandler}>{this.state.group}</button>
                             </div>
                         </form>
 
