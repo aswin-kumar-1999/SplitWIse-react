@@ -1,7 +1,7 @@
 import "./App.css";
 import React, { Component } from "react";
 import { BrowserRouter, Route, Redirect } from "react-router-dom";
-import Dashboard from './components/Dashboard/Dashboard'
+import Dashboard from "./components/Dashboard/Dashboard";
 import LeftPanel from "./components/LeftPanel/LeftPanel";
 import RightPanel from "./components/RightPanel/RightPanel";
 import Activity from "./components/Activity/Activity";
@@ -16,6 +16,8 @@ class App extends Component {
     this.state = {
       groupName: "",
       groups: [],
+      displayName: "",
+      displayGroupName: "",
     };
   }
 
@@ -29,6 +31,11 @@ class App extends Component {
 
   getChildData = (childData) => {
     this.setState({ displayName: childData });
+    if (this.state.groups.includes(childData)) {
+      this.setState({ displayGroupName: childData });
+    } else {
+      this.setState({ displayGroupName: "" });
+    }
   };
 
   render() {
@@ -39,7 +46,7 @@ class App extends Component {
           <div className="container">
             <BrowserRouter>
               <div className='mobile'>
-                <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel" style={{width:'200px'}}>
+                <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel" style={{ width: '200px' }}>
                   <div class="offcanvas-header">
                     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                   </div>
@@ -77,7 +84,9 @@ class App extends Component {
               </div>
             </BrowserRouter>
             <div className='lapview'>
-              <RightPanel />
+              <RightPanel
+                displayName={this.state.displayGroupName}
+              />
             </div>
           </div>
         </div>

@@ -26,6 +26,8 @@ export default class UserUi extends Component {
     }
 
     componentDidUpdate() {
+        console.log(this.props.userName);
+        console.log(this.state.uname);
         this.updateData();
         if (!this.state.sort) {
             this.setState((prevState) => ({

@@ -1,7 +1,6 @@
 .App {
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
 }
 
 p {
@@ -29,15 +28,11 @@ body {
 .centerPanel {
     width: 600px;
     text-align: center;
-    /* border: 1px solid black; */
     box-shadow: 0 0 5px 2px gray;
 }
 
 .leftPanel {
     width: 200px;
-    /* text-align: center; */
-    /* border: 1px solid black;
-    border-left: none; */
     display: flex;
     flex-direction: column;
 }
@@ -55,8 +50,28 @@ body {
 .rightPanel {
     width: 200px;
     text-align: center;
-    /* border-left: none;
-    border: 1px solid black; */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.rightPanelHead {
+    width: 180px;
+    height: 63px;
+    margin-top: 0%;
+    margin-bottom: 0%;
+    padding: 10px;
+    background-color: rgba(236, 236, 236, 0.836);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.displayGroupMembers {
+    width: 180px;
+    padding: 10px;
+    display: flex;
+    justify-content: flex-start;
 }
 
 .activityHead {
@@ -141,7 +156,8 @@ body {
     font-size: 80%;
 }
 
-.activityBlock:hover, .groupBlock:hover {
+.activityBlock:hover,
+.groupBlock:hover {
     background-color: rgb(246, 244, 244);
 }
 
