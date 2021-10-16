@@ -8,6 +8,7 @@ import Activity from "./components/Activity/Activity";
 import Header from "./components/Header";
 import { Switch } from "react-router";
 import CenterDisplay from "./components/CenterDisplay";
+import AllExpense from "./components/AllExpense/AllExpense";
 const groupData = require("./data/group.json");
 
 class App extends Component {
@@ -18,6 +19,7 @@ class App extends Component {
       groups: [],
       displayName: "",
       displayGroupName: "",
+      count: 0,
     };
   }
 
@@ -38,6 +40,12 @@ class App extends Component {
     }
   };
 
+  leftCount = () => {
+    this.setState((prevState) => ({
+      count: prevState.count + 1
+    }));
+  }
+
   render() {
     return (
       <div className="d-flex flex-column">
@@ -56,7 +64,7 @@ class App extends Component {
                 </div>
               </div>
               <div className='lapview'>
-                <LeftPanel parentCallback={this.getChildData} />
+                <LeftPanel parentCallback={this.getChildData} count={this.state.count} />
               </div>
               <div className="centerPanel">
                 <Switch>
@@ -64,10 +72,13 @@ class App extends Component {
                     <Redirect to='/dashboard'></Redirect>
                   </Route>
                   <Route path='/dashboard' exact>
-                    <Dashboard />
+                    <Dashboard parentCallback={this.leftCount} />
                   </Route>
                   <Route path="/activity">
                     <Activity />
+                  </Route>
+                  <Route path='/expense'>
+                    <AllExpense/>
                   </Route>
                   <Route
                     path="/:id"

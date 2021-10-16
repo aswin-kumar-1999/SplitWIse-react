@@ -25,7 +25,6 @@ export default class GroupUi extends Component {
 
     componentDidUpdate() {
         this.updateData();
-        // console.log("Transaction",transactions)
     }
 
     updateData = () => {
@@ -81,10 +80,6 @@ export default class GroupUi extends Component {
                             style={{ marginRight: "10px" }}
                         ></img>
                         {this.props.groupName}
-                    </div>
-                    <div>
-                        <button className="btn-expense">Add Expense</button>
-                        <button className="btn-settle">Settle Up</button>
                     </div>
                 </h2>
                 {this.state.paidBy.map((person, index) => (

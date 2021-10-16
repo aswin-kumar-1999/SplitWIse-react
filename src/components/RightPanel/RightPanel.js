@@ -16,7 +16,6 @@ export default class RightPanel extends Component {
 
     componentDidUpdate() {
         let name = this.props.displayName;
-        // console.log(this.props.displayName);
         if (
             this.props.displayName &&
             this.props.displayName !== this.state.gname
