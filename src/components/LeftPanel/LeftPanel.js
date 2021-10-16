@@ -25,7 +25,6 @@ class LeftPanel extends Component {
     };
 
     componentDidMount() {
-
         for (let key in groupData) {
             this.setState((prevState) => ({
                 group: [...prevState.group, key],
@@ -88,6 +87,10 @@ class LeftPanel extends Component {
         this.setState({ search: event.target.value });
     };
 
+    displayRight = () => {
+        this.props.displayRight(true);
+    };
+
     render() {
         return (
             <div className="leftPanel d-flex flex-column">
@@ -96,7 +99,10 @@ class LeftPanel extends Component {
                     className="navLink"
                     to="dashboard"
                 >
-                    <div className="left-links allExpenses">
+                    <div
+                        className="left-links allExpenses"
+                        onClick={this.displayRight}
+                    >
                         <i
                             className="fa fa-braille"
                             style={{ padding: "5px" }}
@@ -109,7 +115,10 @@ class LeftPanel extends Component {
                     className="navLink"
                     to="activity"
                 >
-                    <div className="left-links allExpenses">
+                    <div
+                        className="left-links allExpenses"
+                        onClick={this.displayRight}
+                    >
                         <i
                             className="fa fa-flag"
                             style={{ padding: "5px" }}
@@ -135,7 +144,10 @@ class LeftPanel extends Component {
                     className="navLink"
                     to="expense"
                 >
-                    <div className="left-links allExpenses">
+                    <div
+                        className="left-links allExpenses"
+                        onClick={this.displayRight}
+                    >
                         <i
                             className="fa fa-list-ul"
                             style={{ padding: "5px" }}

@@ -46,6 +46,12 @@ class App extends Component {
     }));
   }
 
+  displayRight = (childData) => {
+    if(childData) {
+      this.setState({ displayGroupName: "" });
+    }
+  }
+
   render() {
     return (
       <div className="d-flex flex-column">
@@ -64,7 +70,7 @@ class App extends Component {
                 </div>
               </div>
               <div className='lapview'>
-                <LeftPanel parentCallback={this.getChildData} count={this.state.count} />
+                <LeftPanel parentCallback={this.getChildData} count={this.state.count} displayRight={this.displayRight} />
               </div>
               <div className="centerPanel">
                 <Switch>
