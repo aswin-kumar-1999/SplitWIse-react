@@ -117,6 +117,7 @@ export default class UserUi extends Component {
                         {this.props.userName}
                     </div>
                 </h2>
+                {/* {this.state.paid_by */}
                 {this.state.paidBy.map((person, index) => (
                     <UserBlock
                         img={this.state.img1}

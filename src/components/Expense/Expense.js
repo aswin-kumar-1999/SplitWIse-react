@@ -225,8 +225,8 @@ class Expense extends Component {
                     </Cards>
                 </BackDrop>
                 {this.state.splitShare && <Share nameList={this.state.nameList} onCheckedName={this.checkedName} />}
-                {this.state.ispayer && <Paid nameList={this.state.nameList} onCheckerPayer={this.checkedPayer} />}
-                {this.state.popGroup && <Group nameList={this.state.groupName} onCheckerPayer={this.checkedGroup} />}
+                {this.state.ispayer && <Paid nameList={this.state.nameList} onCheckerPayer={this.checkedPayer} message="Choose the payer"/>}
+                {this.state.popGroup && <Group nameList={this.state.groupName} onCheckerPayer={this.checkedGroup} message="Choose the group" />}
             </>
         )
     }
