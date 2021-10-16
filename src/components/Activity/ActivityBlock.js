@@ -13,9 +13,8 @@ export default class ActivityBlock extends Component {
 
     render() {
         return (
-            <div className="activityBlock">
+            <div className="activityBlock d-flex justify-content-start align-items-center">
                 <img src={this.props.img} alt="%" height="50px" width="50px" />
-                {/* <div className="activityText"> */}
                 <div className='d-flex justify-content-center align-items-center ' style={{ width: '100%' }}>
                     {this.props.type === 'credit' &&
                         <div>
@@ -35,8 +34,8 @@ export default class ActivityBlock extends Component {
                             <div>{this.props.date}</div>
                         </div>
                     }
+
                 </div>
-                {/* </div> */}
             </div>
         );
     }

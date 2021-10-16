@@ -12,7 +12,7 @@ export default class UserBlock extends Component {
 
     render() {
         return (
-            <div className="groupBlock">
+            <div className="groupBlock d-flex justify-content-between align-items-center">
                 <div>
                     <img
                         src={this.props.img}

@@ -44,15 +44,14 @@ export default class RightPanel extends Component {
     }
 
     render() {
-        console.log(this.props.displayName);
         return (
             <>
                 {this.props.displayName !== '' &&
                     <div
-                        className="rightPanel"
+                        className="rightPanel d-flex flex-column align-items-end"
                         style={{ display: this.state.display }}
                     >
-                        <h5 className="rightPanelHead">
+                        <h5 className="rightPanelHead d-flex justify-content-center align-items-center">
                             <div>Group Members</div>
                         </h5>
                         {this.state.group.map((item) => (

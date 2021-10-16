@@ -41,10 +41,10 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="d-flex flex-column">
         <Header />
-        <div className="body">
-          <div className="container">
+        <div className="d-flex flex-column">
+          <div className="d-flex container">
             <BrowserRouter>
               <div className='mobile'>
                 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel" style={{ width: '200px' }}>

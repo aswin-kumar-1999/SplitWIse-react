@@ -79,7 +79,7 @@ class LeftPanel extends Component {
 
     render() {
         return (
-            <div className="leftPanel">
+            <div className="leftPanel d-flex flex-column">
                 <NavLink activeClassName="active" className="navLink" to='dashboard'>
                     <div className="left-links allExpenses" >
                         <i className="fa fa-braille" style={{ padding: "5px" }}></i>

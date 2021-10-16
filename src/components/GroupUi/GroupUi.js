@@ -70,7 +70,7 @@ export default class GroupUi extends Component {
     render() {
         return (
             <div>
-                <h2 className="groupHead">
+                <h2 className="groupHead d-flex justify-content-between">
                     <div>
                         <img
                             src="https://s3.amazonaws.com/splitwise/uploads/user/default_avatars/avatar-ruby36-100px.png"
