@@ -90,7 +90,10 @@ export default class GroupUi extends Component {
                         {this.props.groupName}
                     </div>
                 </h2>
-                {this.state.paidBy.map((person, index) => (
+                {this.state.paidBy.length === 0 ? <div><img src="https://assets.splitwise.com/assets/fat_rabbit/app/checkmark-circle-ae319506ad7196dc77eede0aed720a682363d68160a6309f6ebe9ce1983e45f0.png"></img>
+                    <h2>All settled</h2>
+                </div> :
+                this.state.paidBy.map((person, index) => (
                     <GroupBlock
                         key={index}
                         img={this.state.img1}

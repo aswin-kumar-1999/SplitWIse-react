@@ -33,7 +33,10 @@ export class Activity extends Component {
                         type='credit'
                     />
                 ))}
-                {this.props.credit.map(credits => (
+                {this.props.credit.length === 0 ? <div><img src="https://assets.splitwise.com/assets/fat_rabbit/app/checkmark-circle-ae319506ad7196dc77eede0aed720a682363d68160a6309f6ebe9ce1983e45f0.png"></img>
+                    <h2>All settled</h2>
+                </div> :
+                this.props.credit.map(credits => (
                     <ActivityBlock
                         date={this.state.Date1}
                         youOwe={credits[0]}
