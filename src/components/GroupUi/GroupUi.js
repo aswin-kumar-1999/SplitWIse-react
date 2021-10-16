@@ -16,6 +16,7 @@ export default class GroupUi extends Component {
             amount: [],
             desc: [],
             temp: 0,
+            status: true,
         };
     }
 
@@ -29,13 +30,14 @@ export default class GroupUi extends Component {
 
     updateData = () => {
         if (groupData[this.props.groupName]) {
-            if (this.props.groupName !== this.state.gname) {
+            if (this.props.groupName !== this.state.gname && this.state.status) {
                 this.setState({
                     gname: "",
                     paidBy: [],
                     amount: [],
                     desc: [],
                     temp: 0,
+                    status: false,
                 });
                 for (let index = 1; index <= transactions["last"] + 1; index++) {
                     if (
@@ -60,8 +62,11 @@ export default class GroupUi extends Component {
                                 ],
                                 temp: index,
                                 gname: this.props.groupName,
+                                status:true,
                             }));
 
+                        } else {
+                            this.setState({ status: false })
                         }
                     }
                 }
