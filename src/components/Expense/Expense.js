@@ -65,7 +65,6 @@ class Expense extends Component {
             }
         }
         else {
-            // console.log("error")
             this.setState({ err: true, amount: 0, shareamount: 0 })
         }
     }
