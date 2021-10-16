@@ -7,7 +7,6 @@ class Header extends Component {
 
     userHandler = (event) => {
         const user = event.target.value;
-        console.log("User", user)
         this.props.updateUser(user)        
     }
     render() {

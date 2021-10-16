@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import Group from "./Group";
 import Users from "./Users";
-const groupData = require("../../data/group.json");
-const userData = require("../../data/user.json");
+// const groupData = require("../../data/group.json");
+// const userData = require("../../data/user.json");
+import {user as userData, group as groupData} from "../Store/Store"
 
 class LeftPanel extends Component {
     constructor(props) {
@@ -38,6 +39,14 @@ class LeftPanel extends Component {
     }
 
     componentDidUpdate() {
+        for (let key in userData) {
+            if (!this.state.users.includes(key)) {
+                this.setState((prevState) => ({
+                    users: [...prevState.users, key],
+                    usersDisplay: [...prevState.usersDisplay, "block"],
+                }));
+            }
+        }
         let newGroupDisplay = this.state.groupDisplay.map((display, index) => {
             if (
                 this.state.group[index]
@@ -62,9 +71,9 @@ class LeftPanel extends Component {
         });
         if (
             JSON.stringify(newUsersDisplay) !==
-            JSON.stringify(this.state.usersDisplay) ||
+                JSON.stringify(this.state.usersDisplay) ||
             JSON.stringify(newGroupDisplay) !==
-            JSON.stringify(this.state.groupDisplay)
+                JSON.stringify(this.state.groupDisplay)
         ) {
             this.setState({
                 usersDisplay: newUsersDisplay,
@@ -80,13 +89,24 @@ class LeftPanel extends Component {
     render() {
         return (
             <div className="leftPanel d-flex flex-column">
-                <NavLink activeClassName="active" className="navLink" to='dashboard'>
-                    <div className="left-links allExpenses" >
-                        <i className="fa fa-braille" style={{ padding: "5px" }}></i>
+                <NavLink
+                    activeClassName="active"
+                    className="navLink"
+                    to="dashboard"
+                >
+                    <div className="left-links allExpenses">
+                        <i
+                            className="fa fa-braille"
+                            style={{ padding: "5px" }}
+                        ></i>
                         Dashboard
                     </div>
                 </NavLink>
-                <NavLink activeClassName="active" className="navLink" to="activity">
+                <NavLink
+                    activeClassName="active"
+                    className="navLink"
+                    to="activity"
+                >
                     <div className="left-links allExpenses">
                         <i
                             className="fa fa-flag"
@@ -108,10 +128,19 @@ class LeftPanel extends Component {
                         value={this.state.search}
                     />
                 </div>
-                <div className="left-links allExpenses">
-                    <i className="fa fa-list-ul" style={{ padding: "5px" }}></i>
-                    <div>All expensives</div>
-                </div>
+                <NavLink
+                    activeClassName="active"
+                    className="navLink"
+                    to="expense"
+                >
+                    <div className="left-links allExpenses">
+                        <i
+                            className="fa fa-list-ul"
+                            style={{ padding: "5px" }}
+                        ></i>
+                        <div>All expensives</div>
+                    </div>
+                </NavLink>
                 <div className="left-links group-user-tag">Groups</div>
                 {this.state.group.map((gname, index) => (
                     <Group

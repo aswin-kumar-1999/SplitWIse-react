@@ -26,8 +26,6 @@ export default class UserUi extends Component {
     }
 
     componentDidUpdate() {
-        console.log(this.props.userName);
-        console.log(this.state.uname);
         this.updateData();
         if (!this.state.sort) {
             this.setState((prevState) => ({
@@ -91,6 +89,7 @@ export default class UserUi extends Component {
                             ...prevState.transactions,
                             ...userData[element][this.props.userName],
                         ],
+                        uname: this.props.userName,
                     }));
                 }
             }
@@ -111,10 +110,6 @@ export default class UserUi extends Component {
                             style={{ marginRight: "10px" }}
                         ></img>
                         {this.props.userName}
-                    </div>
-                    <div>
-                        <button className="btn-expense">Add Expense</button>
-                        <button className="btn-settle">Settle Up</button>
                     </div>
                 </h2>
                 {this.state.paidBy.map((person, index) => (
