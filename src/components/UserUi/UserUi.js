@@ -44,16 +44,18 @@ export default class UserUi extends Component {
     addData = () => {
         this.state.transactions.map((element) => {
             if (transactionData[element]) {
-                this.setState((prevState) => ({
-                    paidBy: [...prevState.paidBy, transactionData[element].paid_by],
-                    amount: [...prevState.amount, transactionData[element].amount],
-                    desc: [...prevState.desc, transactionData[element].desc],
-                    sharedBy: [
-                        ...prevState.sharedBy,
-                        transactionData[element]["owes"].length,
-                    ],
-                    count: this.state.transactions.length,
-                }));
+                if (transactionData[element]["owes"].includes(this.props.userName) || transactionData[element]["paid_by"] === this.props.userName) {
+                    this.setState((prevState) => ({
+                        paidBy: [...prevState.paidBy, transactionData[element].paid_by],
+                        amount: [...prevState.amount, transactionData[element].amount],
+                        desc: [...prevState.desc, transactionData[element].desc],
+                        sharedBy: [
+                            ...prevState.sharedBy,
+                            transactionData[element]["owes"].length,
+                        ],
+                        count: this.state.transactions.length,
+                    }));
+                }
             }
         });
     };
@@ -85,6 +87,7 @@ export default class UserUi extends Component {
                     }
                 }
                 for (let element of userData[this.props.userName]["owes"]) {
+                    // if(transactionData[])
                     this.setState((prevState) => ({
                         temp: prevState.transactions.length,
                         transactions: [
