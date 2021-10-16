@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import Group from "./Group";
 import Users from "./Users";
-const groupData = require("../../data/group.json");
-const userData = require("../../data/user.json");
+// const groupData = require("../../data/group.json");
+// const userData = require("../../data/user.json");
+import { user as userData, group as groupData } from "../Store/Store"
 
 class LeftPanel extends Component {
     constructor(props) {
@@ -23,6 +24,7 @@ class LeftPanel extends Component {
     };
 
     componentDidMount() {
+
         for (let key in groupData) {
             this.setState((prevState) => ({
                 group: [...prevState.group, key],
@@ -38,6 +40,14 @@ class LeftPanel extends Component {
     }
 
     componentDidUpdate() {
+        for (let key in userData) {
+            if (!this.state.users.includes(key)) {
+                this.setState((prevState) => ({
+                    users: [...prevState.users, key],
+                    usersDisplay: [...prevState.usersDisplay, "block"],
+                }));
+            }
+        }
         let newGroupDisplay = this.state.groupDisplay.map((display, index) => {
             if (
                 this.state.group[index]
