@@ -4,7 +4,7 @@ import Debt from './Debt'
 import Expense from '../Expense/Expense'
 import Settle from '../Settle/Settle'
 import './Dashboard.css'
-import { dataStore, settler, transaction } from '../Store/Store'
+import { dataStore, settler, dashTransaction as transaction } from '../Store/Store'
 import { connect } from "react-redux";
 import { recentActivity } from '../../redux/actions';
 
@@ -42,29 +42,31 @@ class Dashboard extends Component {
         const user = this.props.user;
         this.setState({ credit: [], debt: [] })
         for (let index = 1; index <= transaction.last; index++) {
-            if (transaction[index].paid_by === user) {
-                const shareamount = +transaction[index].amount / (transaction[index].owes.length + 1);
-                const lent = +transaction[index].amount - shareamount
-                const owesName = transaction[index].owes.join(', ')
-                this.setState(prevState => ({
-                    credit: [...prevState.credit, [
-                        owesName,
-                        shareamount,
-                        transaction[index].desc
-                    ]],
-                    lent: prevState.lent + lent
-                }))
-            }
-            if (transaction[index].owes.includes(user)) {
-                const shareamount = +transaction[index].amount / (transaction[index].owes.length + 1);
-                this.setState(prevState => ({
-                    debt: [...prevState.debt, [
-                        transaction[index].paid_by,
-                        shareamount,
-                        transaction[index].desc
-                    ]],
-                    owe: prevState.owe - shareamount
-                }))
+            if (transaction[index]) {
+                if (transaction[index].paid_by === user) {
+                    const shareamount = +transaction[index].amount / (transaction[index].owes.length + 1);
+                    const lent = +transaction[index].amount - shareamount
+                    const owesName = transaction[index].owes.join(', ')
+                    this.setState(prevState => ({
+                        credit: [...prevState.credit, [
+                            owesName,
+                            shareamount,
+                            transaction[index].desc
+                        ]],
+                        lent: prevState.lent + lent
+                    }))
+                }
+                if (transaction[index].owes.includes(user)) {
+                    const shareamount = +transaction[index].amount / (transaction[index].owes.length + 1);
+                    this.setState(prevState => ({
+                        debt: [...prevState.debt, [
+                            transaction[index].paid_by,
+                            shareamount,
+                            transaction[index].desc
+                        ]],
+                        owe: prevState.owe - shareamount
+                    }))
+                }
             }
         }
     }
@@ -106,8 +108,9 @@ class Dashboard extends Component {
         this.setState((prevState) => ({ popSettle: !prevState.popSettle }))
     }
     settleUpHandler = (isSettled) => {
-        settler(this.props.user)
+
         if (isSettled) {
+            settler(this.props.user)
             this.setState((prevState) => ({ popSettle: !prevState.popSettle, debt: [], credit: [], lent: 0, owe: 0 }))
         }
         else {
@@ -116,7 +119,7 @@ class Dashboard extends Component {
     }
 
     render() {
-        {this.props.recentActivity({debt:this.state.debt,credit:this.state.credit})}
+        { this.props.recentActivity({ debt: this.state.debt, credit: this.state.credit }) }
         return (
             <>
                 <div>
@@ -134,15 +137,15 @@ class Dashboard extends Component {
                             <div className="border-top border-bottom border-2">
                                 <div className="row py-1 fs-6 " >
                                     <div className="col-sm-4 border-end text-center " >
-                                        total balance<br />  {this.state.lent < (this.state.owe*-1) && (
-                                            <span className='debt'> ₹ {(this.state.lent + this.state.owe).toFixed(2)*-1} </span>
+                                        total balance<br />  {this.state.lent < (this.state.owe * -1) && (
+                                            <span className='debt'> ₹ {(this.state.lent + this.state.owe).toFixed(2) * -1} </span>
                                         )}
-                                        {this.state.lent > (this.state.owe*-1) && (
-                                            <span className='credit'> ₹ {(this.state.lent + this.state.owe).toFixed(2) } </span>
+                                        {this.state.lent > (this.state.owe * -1) && (
+                                            <span className='credit'> ₹ {(this.state.lent + this.state.owe).toFixed(2)} </span>
                                         )}
                                     </div>
                                     <div className="col-sm-4 border-end text-center">
-                                        <div> you owe  <span className='debt'>   <br /> ₹ {(this.state.owe.toFixed(2) *-1) } </span>
+                                        <div> you owe  <span className='debt'>   <br /> ₹ {(this.state.owe.toFixed(2) * -1)} </span>
                                         </div>
                                     </div>
                                     <div className="col-sm-4 text-center">

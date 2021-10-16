@@ -37,29 +37,32 @@ export default class GroupUi extends Component {
                     desc: [],
                     temp: 0,
                 });
-                for (let index = 1; index <= transactions["last"]+1; index++) {
+                for (let index = 1; index <= transactions["last"] + 1; index++) {
                     if (
                         groupData[this.props.groupName].transaction.includes(
                             index
                         ) &&
                         index !== this.state.temp
                     ) {
-                        this.setState((prevState) => ({
-                            paidBy: [
-                                ...prevState.paidBy,
-                                transactions[`${index}`].paid_by,
-                            ],
-                            amount: [
-                                ...prevState.amount,
-                                transactions[`${index}`].amount,
-                            ],
-                            desc: [
-                                ...prevState.desc,
-                                transactions[`${index}`].desc,
-                            ],
-                            temp: index,
-                            gname: this.props.groupName,
-                        }));
+                        if (transactions[index]) {
+                            this.setState((prevState) => ({
+                                paidBy: [
+                                    ...prevState.paidBy,
+                                    transactions[`${index}`].paid_by,
+                                ],
+                                amount: [
+                                    ...prevState.amount,
+                                    transactions[`${index}`].amount,
+                                ],
+                                desc: [
+                                    ...prevState.desc,
+                                    transactions[`${index}`].desc,
+                                ],
+                                temp: index,
+                                gname: this.props.groupName,
+                            }));
+
+                        }
                     }
                 }
             }

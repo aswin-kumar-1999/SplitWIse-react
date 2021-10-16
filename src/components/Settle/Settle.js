@@ -3,7 +3,6 @@ import BackDrop from '../UI/BackDrop';
 import Cards from '../UI/Cards';
 import { connect } from "react-redux";
 import { updateUser } from '../../redux/actions';
-import { settler } from '../Store/Store'
 import './Settle.css'
 export class Settle extends Component {
     constructor(props) {
@@ -35,13 +34,12 @@ export class Settle extends Component {
     }
 
     closeHandler = () => {
-        this.props.onClose();
+        this.props.onClose(false);
     }
     settledUpHandler = () => {
         this.props.onClose(true)
     }
     settleHandler = () => {
-        settler(this.props.user)
         this.setState({ isSpinner: 1 })
         setTimeout(() => {
             this.setState({ isSpinner: 2 })

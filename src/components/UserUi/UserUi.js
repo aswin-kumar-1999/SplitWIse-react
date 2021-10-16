@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import UserBlock from "./UserBlock";
+import { dashTransaction as transactionData } from '../Store/Store'
 const userData = require("../../data/user.json");
-const transactionData = require("../../data/transaction.json");
-
+// const transactionData = require("../../data/transaction.json");
 export default class UserUi extends Component {
     constructor(props) {
         super(props);
@@ -43,16 +43,18 @@ export default class UserUi extends Component {
 
     addData = () => {
         this.state.transactions.map((element) => {
-            this.setState((prevState) => ({
-                paidBy: [...prevState.paidBy, transactionData[element].paid_by],
-                amount: [...prevState.amount, transactionData[element].amount],
-                desc: [...prevState.desc, transactionData[element].desc],
-                sharedBy: [
-                    ...prevState.sharedBy,
-                    transactionData[element]["owes"].length,
-                ],
-                count: this.state.transactions.length,
-            }));
+            if (transactionData[element]) {
+                this.setState((prevState) => ({
+                    paidBy: [...prevState.paidBy, transactionData[element].paid_by],
+                    amount: [...prevState.amount, transactionData[element].amount],
+                    desc: [...prevState.desc, transactionData[element].desc],
+                    sharedBy: [
+                        ...prevState.sharedBy,
+                        transactionData[element]["owes"].length,
+                    ],
+                    count: this.state.transactions.length,
+                }));
+            }
         });
     };
 

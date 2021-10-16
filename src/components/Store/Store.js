@@ -1,4 +1,5 @@
 let updateTransaction = undefined;
+let updateDashTransaction = undefined;
 let updateGroup = undefined;
 let updateUser = undefined;
 let lastTransaction = 0;
@@ -6,18 +7,26 @@ let lastTransaction = 0;
 export const transaction = updateTransaction ?? require('../../data/transaction.json');
 export const group = updateGroup ?? require('../../data/group.json');
 export const user = updateUser ?? require('../../data/user.json');
+export const dashTransaction = updateDashTransaction ?? require('../../data/transaction.json');
 
 export const dataStore = (amount, paid_by, owes, desc, groupName) => {
-
-    if (updateTransaction === undefined) {
+    console.log("sadfsadf")
+    if (updateUser === undefined) {
         console.log("unpdate empty")
         lastTransaction = +transaction.last
         updateTransaction = transaction;
+        updateDashTransaction = transaction;
         updateGroup = group;
         updateUser = user;
     }
     // console.log(updateUser)
     lastTransaction += 1;
+    updateDashTransaction[lastTransaction] = {
+        amount,
+        paid_by,
+        owes,
+        desc
+    }
     updateTransaction[lastTransaction] = {
         amount,
         paid_by,
@@ -27,15 +36,16 @@ export const dataStore = (amount, paid_by, owes, desc, groupName) => {
     updateTransaction.last = lastTransaction;
     if (groupName === 'No group') {
         updateUser[paid_by] = updateUser[paid_by] ?? {}
-        console.log("owe",owes)
-        owes.forEach(name=>{
-            updateUser[paid_by] = { ...updateUser[paid_by],
+        console.log("owe", owes)
+        owes.forEach(name => {
+            updateUser[paid_by] = {
+                ...updateUser[paid_by],
                 [name]: updateUser[paid_by][name] ?? [],
                 owes: updateUser[paid_by].owes ?? []
             }
             updateUser[paid_by] = {
                 ...updateUser[paid_by],
-                [name]: [...updateUser[paid_by][name], lastTransaction],      
+                [name]: [...updateUser[paid_by][name], lastTransaction],
             }
 
             updateUser[name] = updateUser[name] ?? {};
@@ -59,48 +69,24 @@ export const dataStore = (amount, paid_by, owes, desc, groupName) => {
 }
 
 export const settler = (userName) => {
-
-    if (updateTransaction === undefined) {
-        console.log("unpdate empty")
-        updateTransaction = transaction;
-        updateGroup = group;
-        updateUser = user;
+    if (updateDashTransaction == undefined) {
+        updateDashTransaction = transaction
     }
+    console.log(updateDashTransaction)
+    for (let key in updateDashTransaction) {
+        if (key !== "last") {
+            if (updateDashTransaction[key].paid_by === userName) {
+                delete updateDashTransaction[key]
+            }
 
-    //Lent
-    for (let oweTo in updateUser[userName]) {
-        for (let transactionId of updateUser[userName][oweTo]) {
-            delete updateTransaction[transactionId]
+            else if (updateDashTransaction[key]["owes"].includes(userName)) {
+                updateDashTransaction[key].owes = updateDashTransaction[key].owes.filter(name => name !== userName)
+                if( updateDashTransaction[key].owes.length ===0){
+                    delete updateDashTransaction[key]
+                }
+            }
+            console.log(updateDashTransaction)
         }
     }
-    console.log(updateUser[userName])
-    //Owe
-    updateUser[userName].owes.forEach(name => {
-        updateUser[name][userName].forEach(transactionId => {
-            if (updateTransaction[transactionId].owes.length === 1) {
-                delete updateTransaction[transactionId]
-            } else {
-                updateTransaction[transactionId].owes = updateTransaction[transactionId].owes.filter(name => name !== userName)
-            }
-        })
-        delete updateUser[name][userName];
-        updateUser[name].owes=updateUser[name].owes.filter(name=> name !== userName)
-    });
-    delete updateUser[userName];
-    console.log("Deleted User", updateUser);
-    console.log("Transaction", updateTransaction)
-    // for (let group in updateGroup) {
-    //     if (updateGroup[group].users.includes(user)) {
-    //         for (let transactionId of updateGroup[group].transaction) {
-    //             if (updateTransaction[transactionId].paid_by === user) {
-    //                 delete updateTransaction[transactionId]
-    //             }
-    //             else if (updateTransaction[transactionId].owes.includes(user)) {
-    //                 updateTransaction[transactionId].owes =
-    //                     updateTransaction[transactionId].owes.
-    //                         filter((friends) => friends !== user)
-    //             }
-    //         }
-    //     }
-    // }
+    console.log(updateDashTransaction)
 }
