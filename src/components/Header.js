@@ -24,9 +24,9 @@ class Header extends Component {
                                 </button>
                             </div>
                         </div>
-                        <div className='lapview'>
-                            <select class="form-select-md" aria-label="Default select example" onChange={this.userHandler}>
-                                <option value="aswin" selected>Aswin</option>
+                        <div className='lapview bg-transparent'>
+                            <select className="form-select-md bg-transparent me-5" style={{border:"none",appearance: "none",color:"white",cursor:'pointer'}} aria-label="Default select example" onChange={this.userHandler}>
+                                <option value="aswin" style={{fill:'blue'}} selected>Aswin</option>
                                 <option value="harsh">Harsh</option>
                                 <option value="pravin">Pravin</option>
                             </select>

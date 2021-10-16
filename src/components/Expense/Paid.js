@@ -28,7 +28,7 @@ class paid extends Component {
                         <header
                             className='d-flex justify-content-between align-items-center px-2 py-1 fs-5 fw-bold rounded-top-3 paid'
                         >
-                            <span>Choose payer</span>
+                            <span>{this.props.message}</span>
                             <i className="fas fa-times" onClick={this.sendPayer}></i>
                         </header>
                         <div className='px-3'>

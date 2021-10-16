@@ -163,19 +163,23 @@ class Dashboard extends Component {
                             <span>YOU OWE</span>
                             <span>YOU ARE OWED</span>
                         </div>
+                        {this.state.debt.length === 0 && this.state.credit.length === 0 ? <div><img src="https://assets.splitwise.com/assets/fat_rabbit/app/checkmark-circle-ae319506ad7196dc77eede0aed720a682363d68160a6309f6ebe9ce1983e45f0.png"></img>
+                            <h2>All settled</h2>
+                        </div> :
+                            <div className="d-flex ">
+                                <span className="border-end border-1 col-6">
+                                    {this.state.debt.map((data, index) => (
+                                        <Debt key={index} name={data[0]} amount={data[1].toFixed(2)} />
+                                    ))}
+                                </span>
+                                <span className="border-start border-1 col-6 " >
+                                    {this.state.credit.map((data, index) => (
+                                        <Credit key={index} name={data[0]} amount={data[1].toFixed(2)} />
+                                    ))}
+                                </span>
+                            </div>
+                        }
 
-                        <div className="d-flex ">
-                            <span className="border-end border-1 col-6">
-                                {this.state.debt.map((data, index) => (
-                                    <Debt key={index} name={data[0]} amount={data[1].toFixed(2)} />
-                                ))}
-                            </span>
-                            <span className="border-start border-1 col-6 " >
-                                {this.state.credit.map((data, index) => (
-                                    <Credit key={index} name={data[0]} amount={data[1].toFixed(2)} />
-                                ))}
-                            </span>
-                        </div>
 
                     </div>
                 </div>

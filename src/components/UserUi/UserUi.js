@@ -117,15 +117,20 @@ export default class UserUi extends Component {
                         {this.props.userName}
                     </div>
                 </h2>
-                {this.state.paidBy.map((person, index) => (
-                    <UserBlock
-                        img={this.state.img1}
-                        paidBy={person}
-                        amount={this.state.amount[index]}
-                        desc={this.state.desc[index]}
-                        sharedBy={this.state.sharedBy[index]}
-                    />
-                ))}
+                {/* {this.state.paid_by */}
+                {this.state.paidBy.length === 0 ? <div><img src="https://assets.splitwise.com/assets/fat_rabbit/app/checkmark-circle-ae319506ad7196dc77eede0aed720a682363d68160a6309f6ebe9ce1983e45f0.png"></img>
+                    <h2>All settled</h2>
+                </div> :
+
+                    this.state.paidBy.map((person, index) => (
+                        <UserBlock
+                            img={this.state.img1}
+                            paidBy={person}
+                            amount={this.state.amount[index]}
+                            desc={this.state.desc[index]}
+                            sharedBy={this.state.sharedBy[index]}
+                        />
+                    ))}
             </div>
         );
     }
