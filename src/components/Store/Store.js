@@ -83,6 +83,8 @@ export const settler = (userName) => {
                 updateTransaction[transactionId].owes = updateTransaction[transactionId].owes.filter(name => name !== userName)
             }
         })
+        delete updateUser[name][userName];
+        updateUser[name].owes=updateUser[name].owes.filter(name=> name !== userName)
     });
     delete updateUser[userName];
     console.log("Deleted User", updateUser);

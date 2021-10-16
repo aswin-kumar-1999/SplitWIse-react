@@ -4,7 +4,7 @@ import Debt from './Debt'
 import Expense from '../Expense/Expense'
 import Settle from '../Settle/Settle'
 import './Dashboard.css'
-import { dataStore, transaction } from '../Store/Store'
+import { dataStore, settler, transaction } from '../Store/Store'
 import { connect } from "react-redux";
 import { recentActivity } from '../../redux/actions';
 
@@ -31,20 +31,20 @@ class Dashboard extends Component {
     }
     componentDidUpdate(prevProps, prevState) {
         if (prevProps.user !== this.props.user) {
-            { console.log("redux", this.props.user) }
+            // { console.log("redux", this.props.user) }
             // this.setState({user:this.props.user})
             this.dataExtraction();
 
         }
         if (prevState.lastTransaction !== transaction.last) {
-            console.log("Update")
+            // console.log("Update")
             this.setState({ lastTransaction: transaction.last })
             this.dataExtraction();
         }
     }
     dataExtraction = () => {
         const user = this.props.user;
-        console.log(transaction)
+        // console.log(transaction)
         this.setState({ credit: [], debt: [] })
         for (let index = 1; index <= transaction.last; index++) {
             if (transaction[index].paid_by === user) {
@@ -114,6 +114,7 @@ class Dashboard extends Component {
         this.setState((prevState) => ({ popSettle: !prevState.popSettle }))
     }
     settleUpHandler = (isSettled) => {
+        settler(this.props.user)
         if (isSettled) {
             this.setState((prevState) => ({ popSettle: !prevState.popSettle, debt: [], credit: [], lent: 0, owe: 0 }))
         }
