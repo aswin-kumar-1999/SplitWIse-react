@@ -141,15 +141,15 @@ class Dashboard extends Component {
                             <div className="border-top border-bottom border-2">
                                 <div className="row py-1 fs-6 " >
                                     <div className="col-sm-4 border-end text-center " >
-                                        total balance<br />  {this.state.lent < this.state.owe && (
-                                            <span className='credit'> ₹ {(this.state.lent + this.state.owe).toFixed(2)} </span>
+                                        total balance<br />  {this.state.lent < (this.state.owe*-1) && (
+                                            <span className='debt'> ₹ {(this.state.lent + this.state.owe).toFixed(2)*-1} </span>
                                         )}
-                                        {this.state.lent > this.state.owe && (
-                                            <span className='debt'> ₹ {(this.state.lent + this.state.owe).toFixed(2) * -1} </span>
+                                        {this.state.lent > (this.state.owe*-1) && (
+                                            <span className='credit'> ₹ {(this.state.lent + this.state.owe).toFixed(2) } </span>
                                         )}
                                     </div>
                                     <div className="col-sm-4 border-end text-center">
-                                        <div> you owe  <span className='debt'>   <br /> ₹ {this.state.owe.toFixed(2) * -1} </span>
+                                        <div> you owe  <span className='debt'>   <br /> ₹ {(this.state.owe.toFixed(2) *-1) } </span>
                                         </div>
                                     </div>
                                     <div className="col-sm-4 text-center">
