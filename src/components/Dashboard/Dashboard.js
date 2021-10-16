@@ -28,6 +28,7 @@ class Dashboard extends Component {
         this.setState({ lastTransaction: transaction.last })
     }
     componentDidUpdate(prevProps, prevState) {
+        this.props.parentCallback()
         if (prevProps.user !== this.props.user) {
             this.dataExtraction();
 

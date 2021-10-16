@@ -4,7 +4,7 @@ import Group from "./Group";
 import Users from "./Users";
 // const groupData = require("../../data/group.json");
 // const userData = require("../../data/user.json");
-import {user as userData, group as groupData} from "../Store/Store"
+import { user as userData, group as groupData } from "../Store/Store";
 
 class LeftPanel extends Component {
     constructor(props) {
@@ -16,6 +16,7 @@ class LeftPanel extends Component {
             users: [],
             usersDisplay: [],
             search: "",
+            counter: 0,
         };
     }
 
