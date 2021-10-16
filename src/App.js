@@ -19,6 +19,7 @@ class App extends Component {
       groups: [],
       displayName: "",
       displayGroupName: "",
+      count: 0,
     };
   }
 
@@ -39,6 +40,12 @@ class App extends Component {
     }
   };
 
+  leftCount = () => {
+    this.setState((prevState) => ({
+      count: prevState.count + 1
+    }));
+  }
+
   render() {
     return (
       <div className="d-flex flex-column">
@@ -57,7 +64,7 @@ class App extends Component {
                 </div>
               </div>
               <div className='lapview'>
-                <LeftPanel parentCallback={this.getChildData} />
+                <LeftPanel parentCallback={this.getChildData} count={this.state.count} />
               </div>
               <div className="centerPanel">
                 <Switch>
@@ -65,7 +72,7 @@ class App extends Component {
                     <Redirect to='/dashboard'></Redirect>
                   </Route>
                   <Route path='/dashboard' exact>
-                    <Dashboard />
+                    <Dashboard parentCallback={this.leftCount} />
                   </Route>
                   <Route path="/activity">
                     <Activity />

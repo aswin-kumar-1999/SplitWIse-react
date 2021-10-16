@@ -20,7 +20,6 @@ export class Activity extends Component {
     }
 
     render() {
-        { console.log("Activity", this.props.credit) }
         return (
             <div className="activity">
                 <h1 className="activityHead">Recent Activity</h1>

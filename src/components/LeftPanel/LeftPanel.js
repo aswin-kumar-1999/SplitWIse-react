@@ -4,7 +4,7 @@ import Group from "./Group";
 import Users from "./Users";
 // const groupData = require("../../data/group.json");
 // const userData = require("../../data/user.json");
-import { user as userData, group as groupData } from "../Store/Store"
+import { user as userData, group as groupData } from "../Store/Store";
 
 class LeftPanel extends Component {
     constructor(props) {
@@ -16,6 +16,7 @@ class LeftPanel extends Component {
             users: [],
             usersDisplay: [],
             search: "",
+            counter: 0,
         };
     }
 
@@ -72,9 +73,9 @@ class LeftPanel extends Component {
         });
         if (
             JSON.stringify(newUsersDisplay) !==
-            JSON.stringify(this.state.usersDisplay) ||
+                JSON.stringify(this.state.usersDisplay) ||
             JSON.stringify(newGroupDisplay) !==
-            JSON.stringify(this.state.groupDisplay)
+                JSON.stringify(this.state.groupDisplay)
         ) {
             this.setState({
                 usersDisplay: newUsersDisplay,
@@ -90,13 +91,24 @@ class LeftPanel extends Component {
     render() {
         return (
             <div className="leftPanel d-flex flex-column">
-                <NavLink activeClassName="active" className="navLink" to='dashboard'>
-                    <div className="left-links allExpenses" >
-                        <i className="fa fa-braille" style={{ padding: "5px" }}></i>
+                <NavLink
+                    activeClassName="active"
+                    className="navLink"
+                    to="dashboard"
+                >
+                    <div className="left-links allExpenses">
+                        <i
+                            className="fa fa-braille"
+                            style={{ padding: "5px" }}
+                        ></i>
                         Dashboard
                     </div>
                 </NavLink>
-                <NavLink activeClassName="active" className="navLink" to="activity">
+                <NavLink
+                    activeClassName="active"
+                    className="navLink"
+                    to="activity"
+                >
                     <div className="left-links allExpenses">
                         <i
                             className="fa fa-flag"
@@ -118,10 +130,16 @@ class LeftPanel extends Component {
                         value={this.state.search}
                     />
                 </div>
-                <NavLink activeClassName="active" className="navLink" to="expense">
-
+                <NavLink
+                    activeClassName="active"
+                    className="navLink"
+                    to="expense"
+                >
                     <div className="left-links allExpenses">
-                        <i className="fa fa-list-ul" style={{ padding: "5px" }}></i>
+                        <i
+                            className="fa fa-list-ul"
+                            style={{ padding: "5px" }}
+                        ></i>
                         <div>All expensives</div>
                     </div>
                 </NavLink>

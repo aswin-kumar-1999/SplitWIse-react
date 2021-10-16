@@ -13,7 +13,6 @@ class Dashboard extends Component {
         super(props)
 
         this.state = {
-            // user: 'aswin',
             debt: [],
             credit: [],
             lent: 0,
@@ -27,31 +26,26 @@ class Dashboard extends Component {
     }
     componentDidMount() {
         this.setState({ lastTransaction: transaction.last })
-        // this.dataExtraction();
     }
     componentDidUpdate(prevProps, prevState) {
+        this.props.parentCallback()
         if (prevProps.user !== this.props.user) {
-            // { console.log("redux", this.props.user) }
-            // this.setState({user:this.props.user})
             this.dataExtraction();
 
         }
         if (prevState.lastTransaction !== transaction.last) {
-            // console.log("Update")
             this.setState({ lastTransaction: transaction.last })
             this.dataExtraction();
         }
     }
     dataExtraction = () => {
         const user = this.props.user;
-        // console.log(transaction)
         this.setState({ credit: [], debt: [] })
         for (let index = 1; index <= transaction.last; index++) {
             if (transaction[index].paid_by === user) {
                 const shareamount = +transaction[index].amount / (transaction[index].owes.length + 1);
                 const lent = +transaction[index].amount - shareamount
                 const owesName = transaction[index].owes.join(', ')
-                // console.log(shareamount, lent, owesName)
                 this.setState(prevState => ({
                     credit: [...prevState.credit, [
                         owesName,
@@ -73,14 +67,12 @@ class Dashboard extends Component {
                 }))
             }
         }
-        // this.props.recentActivity({debt:this.state.debt,credit:this.state.credit})
     }
 
     expenseHandler = () => {
         this.setState((prevState) => ({ popExpense: !prevState.popExpense }))
     }
     newExpensehandler = ({ amount, paid_by, owes, desc, popExpense, group }) => {
-        // console.log("newExpense", amount, paid_by, owes, desc, popExpense, group)
         if (paid_by === this.props.user) {
             const shareamount = amount / (owes.length + 1);
             const lent = amount - shareamount
