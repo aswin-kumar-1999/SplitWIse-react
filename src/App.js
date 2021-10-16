@@ -8,6 +8,7 @@ import Activity from "./components/Activity/Activity";
 import Header from "./components/Header";
 import { Switch } from "react-router";
 import CenterDisplay from "./components/CenterDisplay";
+import AllExpense from "./components/AllExpense/AllExpense";
 const groupData = require("./data/group.json");
 
 class App extends Component {
@@ -68,6 +69,9 @@ class App extends Component {
                   </Route>
                   <Route path="/activity">
                     <Activity />
+                  </Route>
+                  <Route path='/expense'>
+                    <AllExpense/>
                   </Route>
                   <Route
                     path="/:id"

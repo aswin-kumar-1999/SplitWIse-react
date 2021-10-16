@@ -108,10 +108,13 @@ class LeftPanel extends Component {
                         value={this.state.search}
                     />
                 </div>
-                <div className="left-links allExpenses">
-                    <i className="fa fa-list-ul" style={{ padding: "5px" }}></i>
-                    <div>All expensives</div>
-                </div>
+                <NavLink activeClassName="active" className="navLink" to="expense">
+
+                    <div className="left-links allExpenses">
+                        <i className="fa fa-list-ul" style={{ padding: "5px" }}></i>
+                        <div>All expensives</div>
+                    </div>
+                </NavLink>
                 <div className="left-links group-user-tag">Groups</div>
                 {this.state.group.map((gname, index) => (
                     <Group
