@@ -44,7 +44,7 @@ class Expense extends Component {
         this.setState((prevState) => ({ splitShare: !prevState.splitShare }))
     }
     nameHandler = (event) => {
-        const name = event.target.value;
+        const name = event.target.value.toLowerCase();
         if (!this.state.nameList.includes(name) && name.length !== 0) {
             this.setState(prevState => ({
                 nameList: [...prevState.nameList, name],

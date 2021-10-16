@@ -6,7 +6,7 @@ import Settle from '../Settle/Settle'
 import './Dashboard.css'
 import { dataStore, transaction } from '../Store/Store'
 import { connect } from "react-redux";
-import { updateUser } from '../../redux/actions';
+import { recentActivity } from '../../redux/actions';
 
 class Dashboard extends Component {
     constructor(props) {
@@ -55,7 +55,8 @@ class Dashboard extends Component {
                 this.setState(prevState => ({
                     credit: [...prevState.credit, [
                         owesName,
-                        shareamount
+                        shareamount,
+                        transaction[index].desc
                     ]],
                     lent: prevState.lent + lent
                 }))
@@ -65,12 +66,14 @@ class Dashboard extends Component {
                 this.setState(prevState => ({
                     debt: [...prevState.debt, [
                         transaction[index].paid_by,
-                        shareamount
+                        shareamount,
+                        transaction[index].desc
                     ]],
                     owe: prevState.owe - shareamount
                 }))
             }
         }
+        // this.props.recentActivity({debt:this.state.debt,credit:this.state.credit})
     }
 
     expenseHandler = () => {
@@ -120,6 +123,7 @@ class Dashboard extends Component {
     }
 
     render() {
+        {this.props.recentActivity({debt:this.state.debt,credit:this.state.credit})}
         return (
             <>
                 <div>
@@ -207,8 +211,8 @@ const mapStateToProps = (state) => {
 
 function mapDispatchToProps(dispatch) {
     return {
-        updateUser: (payload) => {
-            return dispatch(updateUser(payload))
+        recentActivity: (payload) => {
+            return dispatch(recentActivity(payload))
         }
     };
 }

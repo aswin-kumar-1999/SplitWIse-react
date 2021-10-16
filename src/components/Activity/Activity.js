@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import ActivityBlock from "./ActivityBlock";
 
+import { connect } from "react-redux";
+import { recentActivity } from '../../redux/actions';
+
 export class Activity extends Component {
     constructor(props) {
         super(props);
@@ -12,53 +15,52 @@ export class Activity extends Component {
             person1: "Harshdeep Singh",
             Desc1: "Food",
             Group1: "Project",
-            Date1: "Oct 12, 2021",
+            Date1: "Oct 16, 2021",
         };
     }
 
     render() {
+        { console.log("Activity", this.props.credit) }
         return (
             <div className="activity">
                 <h1 className="activityHead">Recent Activity</h1>
-                <ActivityBlock
-                    date={this.state.Date1}
-                    group={this.state.Group1}
-                    person={this.state.person1}
-                    desc={this.state.Desc1}
-                    img={this.state.img1}
-                    amount={this.state.amount1}
-                    status={this.state.status1}
-                />
-                <ActivityBlock
-                    date={this.state.Date1}
-                    group={this.state.Group1}
-                    person={this.state.person1}
-                    desc={this.state.Desc1}
-                    img={this.state.img1}
-                    amount={this.state.amount1}
-                    status={this.state.status1}
-                />
-                <ActivityBlock
-                    date={this.state.Date1}
-                    group={this.state.Group1}
-                    person={this.state.person1}
-                    desc={this.state.Desc1}
-                    img={this.state.img1}
-                    amount={this.state.amount1}
-                    status={this.state.status1}
-                />
-                <ActivityBlock
-                    date={this.state.Date1}
-                    group={this.state.Group1}
-                    person="Aswin Kumar"
-                    desc="Travel"
-                    img={this.state.img1}
-                    amount="30"
-                    // status={this.state.status1}
-                />
+                {this.props.credit.map(credits => (
+                    <ActivityBlock
+                        date={this.state.Date1}
+                        lentTo={credits[0]}
+                        desc={credits[2]}
+                        img={this.state.img1}
+                        amount={credits[1]}
+                        type='credit'
+                    />
+                ))}
+                {this.props.credit.map(credits => (
+                    <ActivityBlock
+                        date={this.state.Date1}
+                        youOwe={credits[0]}
+                        desc={credits[2]}
+                        img={this.state.img1}
+                        amount={credits[1]}
+                        type='debt'
+                    />
+                ))}
             </div>
         );
     }
 }
 
-export default Activity;
+const mapStateToProps = (state) => {
+    return {
+        credit: state.credit,
+        debt: state.debt
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        recentActivity: (payload) => {
+            return dispatch(recentActivity(payload))
+        }
+    };
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Activity);

@@ -15,31 +15,28 @@ export default class ActivityBlock extends Component {
         return (
             <div className="activityBlock">
                 <img src={this.props.img} alt="%" height="50px" width="50px" />
-                <div className="activityText">
-                    <div>
-                        {this.props.person} added "{this.props.desc}" in "
-                        {this.props.group}"
-                    </div>
-                    <div
-                        className="status-amount"
-                        style={{
-                            color:
-                                this.props.status !== "owe"
-                                    ? this.state.greenColor
-                                    : this.state.redColor,
-                        }}
-                    >
-                        you{" "}
-                        {this.props.status === "owe" ? (
-                            <p>owe</p>
-                        ) : (
-                            <p>get back</p>
-                        )}{" "}
-                        ₹{this.props.amount}{" "}
-                    </div>
-                    <div className="date"> {this.props.date} </div>
+                {/* <div className="activityText"> */}
+                <div className='d-flex justify-content-center align-items-center ' style={{ width: '100%' }}>
+                    {this.props.type === 'credit' &&
+                        <div>
+                            <div>
+                                you paid for {this.props.desc}
+                                <div className='credit'>  {this.props.lentTo} lent {this.props.amount.toFixed(2)} from you</div>
+                            </div>
+                            <div>{this.props.date}</div>
+                        </div>
+                    }
+                    {this.props.type === 'debt' &&
+                        <div>
+                            <div>
+                                {this.props.youOwe} paid for {this.props.desc}
+                                <div className='debt'>   you owe   {this.props.amount.toFixed(2)} from you</div>
+                            </div>
+                            <div>{this.props.date}</div>
+                        </div>
+                    }
                 </div>
-                <div></div>
+                {/* </div> */}
             </div>
         );
     }

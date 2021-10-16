@@ -82,10 +82,10 @@ export default class GroupUi extends Component {
                         ></img>
                         {this.props.groupName}
                     </div>
-                    <div>
+                    {/* <div>
                         <button className="btn-expense">Add Expense</button>
                         <button className="btn-settle">Settle Up</button>
-                    </div>
+                    </div> */}
                 </h2>
                 {this.state.paidBy.map((person, index) => (
                     <GroupBlock
