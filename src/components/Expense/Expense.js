@@ -50,6 +50,8 @@ class Expense extends Component {
                 nameList: [...prevState.nameList, name],
                 name: ''
             }))
+        }else{
+            this.setState({name:''})
         }
     }
 
